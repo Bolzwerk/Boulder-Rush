@@ -13,6 +13,8 @@ const faces=fonts.map(([fam,,dst])=>`@font-face{font-family:"${fam}";src:url(fon
 
 let game=readFileSync('src/game.html','utf8');
 game=game.replace(/<link rel="preconnect"[^>]*>\n/,'').replace(/<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com[^>]*>\n/,`<style>\n${faces}\n</style>\n`);
+const build=process.env.GITHUB_RUN_NUMBER?`1.0.${process.env.GITHUB_RUN_NUMBER}`:'dev';
+game=game.replace("const BUILD='web';",`const BUILD='${build}';`);
 if(game.includes('fonts.googleapis.com'))throw new Error('Google Fonts link not replaced');
 
 const html=`<!doctype html><html lang="de"><head><meta charset="utf-8">
