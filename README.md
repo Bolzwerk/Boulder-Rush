@@ -1,7 +1,9 @@
 # Boulder Rush
 
 Ein Boulder-Dash-Klon fürs Handy: automatisch erzeugte Höhlen, präzise Touch-Steuerung, Retro-Pixelgrafik,
-XP-Stufen mit Skillbaum und sammelbare, aufwertbare Power-ups.
+XP-Stufen mit Skillbaum und sammelbare, aufwertbare Power-ups. Dazu Tagesherausforderung, Bonus- und Bosswelten,
+Ausrüstung aus Truhen, 15 Avatare als Hommage an Spiel- und Filmhelden der 80er bis frühen 2000er, Erfolge,
+Geist-Replay der eigenen Bestzeit, Minikarte und Zeitsprung.
 
 ## Spielen
 - **Android-App:** unter [Releases → apk-latest](../../releases/tag/apk-latest) `boulder-rush.apk` auf dem Handy herunterladen und installieren.
@@ -28,5 +30,8 @@ damit jeder Build dieselbe Signatur hat. Für eine Veröffentlichung im Play Sto
 ## Spielmechanik in Kürze
 - Welten werden aus ihrer Nummer erzeugt (fester Seed). Nach einem Physik-Vorlauf prüft eine Wegsuche, ob Ausgang und genug
   Diamanten erreichbar sind; wenn nicht, werden Gänge freigegraben.
-- Spielstand in `localStorage`; im claude.ai-Artifact zusätzlich im Konto.
+- Ab Welt 8 gibt es Zauberwände, ab Welt 12 wachsenden Schleim (Amöbe), ab Welt 16 steigendes Wasser. Diese Elemente
+  nutzen einen eigenen Zufallsstrom, damit ältere Welten gleich bleiben. Jede 10. Welt ist eine Bonus- oder Bosswelt.
+- Die Tagesherausforderung wird aus dem Datum erzeugt und ist für alle gleich.
+- Spielstand in `localStorage`, Geister der Bestzeiten unter `boulderRush.ghosts`; im claude.ai-Artifact zusätzlich im Konto.
 - Test-Hilfe im Browser: `window.__br` (genLevel, reach, tick, startStage).

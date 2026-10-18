@@ -56,7 +56,7 @@ button{font:inherit;color:inherit}
 #btns{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none}
 #ctl.left #btns{right:max(14px,env(safe-area-inset-right,0px))}
 #ctl.right #btns{left:max(14px,env(safe-area-inset-left,0px))}
-#pus{display:flex;flex-direction:column;gap:8px}
+#pus{display:grid;grid-template-columns:repeat(2,52px);gap:8px}
 .pu{position:relative;width:52px;height:52px;border-radius:10px;background:#000a;border:2px solid #ffffff30;pointer-events:auto;touch-action:none;display:grid;place-items:center;padding:0}
 .pu img{width:36px;height:36px;image-rendering:pixelated}
 .pu .n{position:absolute;right:-4px;bottom:-4px;min-width:18px;height:18px;border-radius:9px;background:var(--gold);color:#000;font-family:var(--pix);font-size:9px;display:grid;place-items:center;padding:0 3px}
@@ -65,7 +65,7 @@ button{font:inherit;color:inherit}
 .pu.off .n{background:#555;color:#ccc}
 #grab{width:84px;height:84px;border-radius:50%;background:#000a;border:3px solid #ffffff40;pointer-events:auto;touch-action:none;font-family:var(--pix);font-size:9px;line-height:1.5}
 #grab.on{background:#ffcc3340;border-color:var(--gold)}
-@media (max-height:520px){ #pus{display:grid;grid-template-columns:repeat(2,42px)} .pu{width:42px;height:42px} .pu img{width:28px;height:28px} #pus{gap:5px} #grab{width:70px;height:70px} #btns{gap:6px} #zone{height:80%} }
+@media (max-height:520px){ #pus{grid-template-columns:repeat(3,42px)} .pu{width:42px;height:42px} .pu img{width:28px;height:28px} #pus{gap:5px} #grab{width:70px;height:70px} #btns{gap:6px} #zone{height:80%} }
 /* Overlays */
 #ov{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;overflow-y:auto;touch-action:pan-y;
   padding:calc(env(safe-area-inset-top,0px) + 18px) max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 24px) max(16px,env(safe-area-inset-left,0px));
@@ -132,6 +132,35 @@ h2{font-family:var(--pix);font-size:15px;color:var(--gold);margin:6px 0 0;text-a
 #ctl.intro #btns{opacity:0;transition:opacity .3s}
 #skipBtn{position:fixed;z-index:13;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 28px);font-family:var(--pix);font-size:11px;padding:12px 16px;background:#000c;border:2px solid var(--gold);color:var(--gold);cursor:pointer}
 #banner small{display:block;font-size:11px;color:var(--ink)}
+#mapBtn{pointer-events:auto;height:34px;padding:0 8px;background:#0009;border:2px solid var(--line);font-family:var(--pix);font-size:8px;cursor:pointer}
+#mapBtn.on{border-color:var(--gem);color:var(--gem)}
+#hint{position:fixed;z-index:14;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top,0px) + 136px);width:min(86vw,420px);box-sizing:border-box;
+  font-size:20px;line-height:1.1;background:#000d;border:2px solid var(--gem);padding:8px 12px;pointer-events:none;text-align:center;animation:tin .25s ease-out}
+#hint b{font-family:var(--pix);font-size:9px;color:var(--gem);display:block;margin-bottom:5px;font-weight:normal}
+.b.daily{border-color:var(--gem);color:var(--gem)}
+.b small,.world small{display:block;font-family:var(--txt);font-size:17px;color:var(--ink);margin-top:4px}
+.world small{font-size:12px;margin:0;color:var(--gold)}
+.world.sp{border-color:var(--gold)!important}
+.me{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center}
+.me>img,.av>img{width:64px;height:64px;image-rendering:pixelated}
+.gi{width:16px;height:16px;image-rendering:pixelated;vertical-align:-2px}
+.avs{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:8px}
+.av{background:var(--panel2);border:3px solid var(--line);padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;font-family:var(--pix);font-size:9px;line-height:1.5;text-align:center;box-shadow:3px 3px 0 #000}
+.av.sel{border-color:var(--gold);color:var(--gold)}
+.av.lock>img{opacity:.7}
+.av small{font-family:var(--txt);font-size:16px;color:var(--dim);line-height:1}
+.ach{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;border-bottom:2px dashed var(--line)}
+.ach:last-child{border-bottom:0}
+.ach .ic{font-family:var(--pix);font-size:14px;color:var(--line);text-align:center}
+.ach.done .ic{color:var(--gold)}
+.ach .nm{font-family:var(--pix);font-size:10px;line-height:1.4}
+.ach .rw{font-family:var(--pix);font-size:8px;color:var(--dim);text-align:right;line-height:1.6}
+.ach:not(.done) .nm{color:var(--dim)}
+.gear{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;padding:8px 0;border-bottom:2px dashed var(--line)}
+.gear:last-child{border-bottom:0}
+.gear .nm{font-family:var(--pix);font-size:10px;line-height:1.5}
+.gear .slot{font-family:var(--pix);font-size:8px;color:var(--dim)}
+.gear .row{gap:6px}
 @media (prefers-reduced-motion:reduce){.toast{animation:none}}
 </style>
 
@@ -143,6 +172,7 @@ h2{font-family:var(--pix);font-size:15px;color:var(--gold);margin:6px 0 0;text-a
   <div class="chip" id="hGems"><img id="gemIcon" alt=""><span>0/0</span></div>
   <div class="chip" id="hTime">0</div>
   <div class="sp"></div>
+  <button id="mapBtn" aria-label="Minikarte">KARTE</button>
   <button id="pauseBtn" aria-label="Pause">II</button>
 </div>
 <div id="effects"></div>
@@ -154,6 +184,7 @@ h2{font-family:var(--pix);font-size:15px;color:var(--gold);margin:6px 0 0;text-a
 </div>
 <div id="banner" hidden></div>
 <button id="skipBtn" hidden>ÜBERSPRINGEN ▶</button>
+<div id="hint" hidden></div>
 <div id="toasts"></div>
 <div id="ov"></div>
 
@@ -165,12 +196,14 @@ const $=s=>document.querySelector(s);
 const clamp=(v,a,b)=>v<a?a:v>b?b:v;
 function rng(seed){let a=seed>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 const TICK=135;
-const E=0,D=1,W=2,S=3,R=4,G=5,X=6,F=7,B=8,P=9,EX=10,PL=11;
+const E=0,D=1,W=2,S=3,R=4,G=5,X=6,F=7,B=8,P=9,EX=10,PL=11,AM=12,MW=13,CH=14;
 const DX=[0,1,0,-1],DY=[-1,0,1,0];
 
 /* ================= content ================= */
-const PU_IDS=['bomb','shield','freeze','magnet','drill'];
+const PU_IDS=['bomb','shield','freeze','magnet','drill','rewind'];
+const REW_S=[3,3.5,4,4.5,5];
 const PU={
+  rewind:{name:'Zeitsprung',col:'#7bea6a', eff:l=>`Spult das Spiel ${fmtS(REW_S[l-1])} zurück, auch direkt nach einem tödlichen Unfall.`},
   bomb:  {name:'Dynamit',  col:'#ff7a3d', eff:l=>`Sprengt ${BOMB_W[l-1]} breit und ${BOMB_D[l-1]} tief vor dir frei. Diamanten bleiben heil.`},
   shield:{name:'Schild',   col:'#5ee7ff', eff:l=>`${fmtS((4+2*l)*durMul())} unverwundbar. Gegner zerplatzen an dir.`},
   freeze:{name:'Zeitstopp',col:'#b9a6ff', eff:l=>`Felsen und Gegner frieren ${fmtS((3+1.5*l)*durMul())} lang ein.`},
@@ -202,19 +235,124 @@ const THEMES=[
 ];
 const STEEL=['#6f7380','#a9aebb','#383b44'];
 function fmtS(s){return (Math.round(s*10)/10).toString().replace('.',',')+' s'}
+const fmtT=ticks=>(ticks*TICK/1000).toFixed(1).replace('.',',')+' s';
+// Equipment from chests: one item per slot is worn, the rest sits in the bag
+const RAR=[['Gewöhnlich','#b8b0a0'],['Selten','#5ea8ff'],['Episch','#c07bff'],['Legendär','#ffcc33']];
+const SCRAP=[5,15,40,100];
+const GEAR={
+  pick:  {name:'Spitzhacke',vals:[2,4,7,10],  names:['Rostige Spitzhacke','Stahlhacke','Kristallhacke','Drachenzahn-Hacke'],d:v=>`${v} % Chance, beim Graben einen Diamanten zu finden`},
+  boots: {name:'Stiefel',   vals:[8,15,25,40],names:['Lederstiefel','Wanderstiefel','Siebenmeilenstiefel','Chronostiefel'],d:v=>`+${v} Sekunden in jeder Welt`},
+  helmet:{name:'Helm',      vals:[10,20,30,45],names:['Blechhelm','Stahlhelm','Titanhelm','Drachenhelm'],d:v=>`${v} % Chance, einen Felsentreffer zu überstehen`},
+  lamp:  {name:'Lampe',     vals:[10,20,35,50],names:['Öllampe','Karbidlampe','Kristalllampe','Sonnenstein'],d:v=>`Power-ups wirken ${v} % länger`},
+  charm: {name:'Talisman',  vals:[5,10,18,30], names:['Hasenpfote','Kleeblatt','Goldskarabäus','Drachenauge'],d:v=>`+${v} % XP aus allen Quellen`},
+};
+const GEAR_IDS=Object.keys(GEAR);
+const gearName=it=>GEAR[it.s].names[it.r];
+/* Avatars: homages to heroes of 80s, 90s and early-2000s games and films, drawn from scratch.
+   Head rows 0-8 ('e' = eyes, swapped for the blink colour), torso rows 9-12, legs from LEGS (P trousers, W shoes) or custom. */
+const AVATARS=[
+  {id:'kumpel',name:'Kumpel',from:'Das Original',cost:0,pal:{h:'#ffcc33',l:'#ffffff',s:'#f2b48a',b:'#3a7bd5',c:'#2a5aa5',P:'#2b3550',W:'#6b3f1d'},
+   head:["................",".....kkkkkk.....","....khhhhhlk....","...khhhhhhhhk...","...kkkkkkkkkk...","....kssssssk....","....ksessesk....","....kssssssk....",".....kssssk....."],
+   torso:["....kbbbbbbk....","...kbbbccbbbk...","...ksbbccbbsk...","....kbbbbbbk...."]},
+  {id:'klempner',name:'Klempner',from:'Jump-and-Run, 1985',cost:40,pal:{r:'#e83a2a',w:'#ffffff',h:'#5a3010',s:'#f6c08a',m:'#3a1c08',o:'#2e5ad8',y:'#ffd23d',P:'#2e5ad8',W:'#6b3f1d'},
+   head:["................",".....kkkkkk.....","....krrrrrrk....","...krrrwwrrrk...","...kkkkkkkkkkkk.","...khssssssk....","....ksessesk....","....kmmmmmmk....",".....kssssk....."],
+   torso:["....krorrork....","...kroooooork...","...ksoyooyosk...","....kooooook...."]},
+  {id:'zeit',name:'Zeitreisender',from:'Film, 1985',cost:60,pal:{h:'#6a3a1a',s:'#f2b48a',r:'#e0302a',j:'#4a78c0',P:'#3a5a9a',W:'#f0f0f0'},
+   head:["................","................",".....kkkkkk.....","....khhhhhhk....","...khhhhhhhhk...","...khssssshhk...","....ksessesk....","....kssssssk....",".....kssssk....."],
+   torso:["....krrjjrrk....","...kjrrjjrrjk...","...ksrrjjrrsk...","....krrrrrrk...."]},
+  {id:'geist',name:'Geisterjäger',from:'Film, 1984',cost:60,pal:{h:'#4a2a14',s:'#f2b48a',u:'#c8b890',g:'#6a6a70',r:'#d02020',P:'#c8b890',W:'#2a2a2a'},
+   head:["................","................",".....kkkkkk.....","....khhhhhhk....","...khhhhhhhhk...","....khsssshk....","....ksessesk....","....kssssssk....",".....kssssk....."],
+   torso:["....kuuuuuuk....","...kguurruugk...","...ksuuuuuusk...","....kggggggk...."]},
+  {id:'indy',name:'Abenteurer',from:'Film, 1981',cost:80,pal:{f:'#7a4a22',d:'#4a2810',s:'#e8a878',x:'#9a7050',j:'#6a3a1a',c:'#d8c090',P:'#a08860',W:'#4a2a10'},
+   head:["................",".....kkkkkk.....","....kffffffk....","....kddddddk....","..kkkkkkkkkkkk..","....kssssssk....","....ksessesk....","....kxssssxk....",".....kxxxxk....."],
+   torso:["....kjccccjk....","...kjjccccjjk...","...ksjccccjsk...","....kjjddjjk...."]},
+  {id:'link',name:'Waldheld',from:'Action-Adventure, 1986',cost:100,pal:{g:'#3aa83a',G:'#226a22',y:'#f0d040',s:'#f2c090',e:'#1a40a0',b:'#7a4a1a',P:'#e0d8b0',W:'#6b3f1d'},
+   head:["................","......kkkk......",".....kggggk.....","....kggggggkk...","...kGgggggggGk..","...kyyssssyyk...","....ksessesk....","....kssssssk....",".....kssssk....."],
+   torso:["....kggggggk....","...kggggggggk...","...ksbbbbbbsk...","....kGGGGGGk...."]},
+  {id:'boba',name:'Kopfgeldjäger',from:'Weltraum-Saga, 1980',cost:120,pal:{g:'#5a7a4a',G:'#34502a',r:'#b03020',v:'#101010',a:'#8a8a70',y:'#d0b040',P:'#7a7a6a',W:'#5a4a30'},
+   head:["................",".....kkkkkk.....","....kggggggk....","...kggrgggggk...","...kgvvvvvvgk...","...kgggvvgggk...","...kgggvvgggk...","...kgggvvgggk...","....kGGGGGGk...."],
+   torso:["....kaaaaaak....","...kaggaayaak...","...kaggaaaaak...","....kGGGGGGk...."]},
+  {id:'turtle',name:'Kampfkröte',from:'Zeichentrick, 1987',cost:120,blink:'m',pal:{s:'#5ab040',m:'#2a6ad8',e:'#ffffff',y:'#d8b040',b:'#7a4a1a',P:'#5ab040',W:'#3a8a2a'},
+   head:["................","................",".....kkkkkk.....","....kssssssk....","...kssssssssk...","...kmmmmmmmmkmm.","...kmemmmmemkm..","....kssssssk....",".....kssssk....."],
+   torso:["....ksyyyysk....","...ksyyyyyysk...","...ksbbbbbbsk...","....kyyyyyyk...."]},
+  {id:'igel',name:'Blitzigel',from:'Jump-and-Run, 1991',cost:140,blink:'w',pal:{b:'#2050d8',s:'#f2c090',e:'#20a040',w:'#ffffff',P:'#2050d8',W:'#e02020'},
+   head:["................","...k..kkkk..k...","...kbkbbbbkbk...","..kbbbbbbbbbbk..","..kbbbbbbbbbbk..","...kbwwbbwwbk...","...kbwewwewbk...","....kssssssk....",".....kssssk....."],
+   torso:["....kbbbbbbk....","...kbbssssbbk...","...kbbssssbbk...","....kbbbbbbk...."]},
+  {id:'lara',name:'Grabräuberin',from:'Action-Adventure, 1996',cost:160,pal:{h:'#5a3010',s:'#e8a878',t:'#30a0a0',b:'#6a4020',g:'#3a3a3a',P:'#e8a878',W:'#4a2a10'},
+   head:["................",".....kkkkkk.....","....khhhhhhk....","...khhhhhhhhk...","...khsssssshk...","...khsssssshk...","...khsesseshk...","....kssssssk.hk.",".....kssssk..hk."],
+   torso:["....kttttttk.hk.","...ksttttttsk...","...ksgttttgsk...","....kbbbbbbk...."]},
+  {id:'peach',name:'Pilzprinzessin',from:'Jump-and-Run, 1985',cost:160,pal:{c:'#ffcc33',y:'#f8d850',s:'#f8d0b0',e:'#2050c0',p:'#ff8ac8',r:'#e02060',d:'#e060a0',W:'#e04080'},
+   head:["......c..c......",".....kcccck.....","....kyyyyyyk....","...kyyyyyyyyk...","...kyyssssyyk...","...kyssssssyk...","...kysessesyk...","...kyssssssyk...","..kyy.kssk.yyk.."],
+   torso:["....kppppppk....","...kspprrppsk...","...ksppppppsk...","...kppppppppk..."],
+   legs:["..kppppppppppk..","..kddddddddddk..","...kkWWkkWWkk..."]},
+  {id:'neo',name:'Der Auserwählte',from:'Film, 1999',cost:200,pal:{k:'#050505',h:'#1c1c1c',s:'#e8c0a0',g:'#0c0c0c',G:'#3a6a3a',c:'#1c1c24',C:'#30303c',P:'#1c1c24',W:'#050505'},
+   head:["................",".....kkkkkk.....","....khhhhhhk....","...khhhhhhhhk...","...khsssssshk...","....kssssssk....","....kgGggGgk....","....kssssssk....",".....kssssk....."],
+   torso:["...kcccssccck...","...kCccccccCk...","...ksccccccsk...","...kccckkccck..."]},
+  {id:'chief',name:'Supersoldat',from:'Shooter, 2001',cost:250,pal:{g:'#4a7a3a',G:'#2a5a2a',v:'#f0a020',V:'#ffd060',a:'#3a3a3a',P:'#4a7a3a',W:'#2a3a2a'},
+   head:["................",".....kkkkkk.....","....kggggggk....","...kggggggggk...","...kgVvvvvvgk...","...kgvvvvvvgk...","...kGgvvvvgGk...","...kGggggggGk...","....kGGGGGGk...."],
+   torso:["..kggggggggggk..","..kgGkggggkGgk..","...kgaaaaaagk...","....kGGGGGGk...."]},
+  {id:'fresser',name:'Pillenfresser',from:'Arcade, 1980',ach:'g1000',gen:'pac'},
+  {id:'spuk',name:'Spuk',from:'Arcade, 1980',ach:'k100',gen:'ghost'},
+];
+const ACH=[
+  {id:'first', name:'Erster Stollen',     d:'Schaffe deine erste Welt',              xp:20, gems:5,  test:s=>s.stats.clears>=1},
+  {id:'w10',   name:'Tiefgräber',         d:'Schaffe Welt 10',                       xp:60, gems:15, test:s=>s.unlocked>=11},
+  {id:'w25',   name:'Höhlenforscher',     d:'Schaffe Welt 25',                       xp:150,gems:40, test:s=>s.unlocked>=26},
+  {id:'w50',   name:'Erdkern-Expedition', d:'Schaffe Welt 50',                       xp:400,gems:100,test:s=>s.unlocked>=51},
+  {id:'g100',  name:'Funkelsammler',      d:'Sammle 100 Diamanten',                  xp:30, gems:10, test:s=>s.stats.gems>=100},
+  {id:'g1000', name:'Diamantenfieber',    d:'Sammle 1000 Diamanten. Schaltet den Pillenfresser frei', xp:200,gems:50,test:s=>s.stats.gems>=1000},
+  {id:'k10',   name:'Kammerjäger',        d:'Besiege 10 Gegner',                     xp:40, gems:10, test:s=>s.stats.kills>=10},
+  {id:'k100',  name:'Schrecken der Tiefe',d:'Besiege 100 Gegner. Schaltet Spuk frei',xp:200,gems:50, test:s=>s.stats.kills>=100},
+  {id:'perfect5',name:'Perfektionist',    d:'Hole in 5 Welten alle drei Sterne',     xp:80, gems:20, test:s=>Object.values(s.stars).filter(v=>v>=3).length>=5},
+  {id:'bonus', name:'Schatzkammer',       d:'Schaffe eine Bonuswelt',                xp:50, gems:15, test:s=>s.stats.bonus>=1},
+  {id:'boss',  name:'Lawinenreiter',      d:'Schaffe eine Bosswelt',                 xp:120,gems:30, test:s=>s.stats.boss>=1},
+  {id:'daily1',name:'Tagwerk',            d:'Schaffe eine Tagesherausforderung',     xp:40, gems:10, test:s=>s.stats.daily>=1},
+  {id:'streak3',name:'Dranbleiber',       d:'Schaffe 3 Tagesherausforderungen in Folge',xp:100,gems:25,test:s=>s.daily.max>=3},
+  {id:'streak7',name:'Wochenwerk',        d:'Schaffe 7 Tagesherausforderungen in Folge',xp:250,gems:60,test:s=>s.daily.max>=7},
+  {id:'chest5',name:'Schatzsucher',       d:'Öffne 5 Truhen',                        xp:60, gems:15, test:s=>s.stats.chests>=5},
+  {id:'legend',name:'Legendär!',          d:'Finde ein legendäres Ausrüstungsteil',  xp:150,gems:0,  test:s=>s.stats.legend>=1},
+  {id:'amoeba',name:'Schleimbändiger',    d:'Schließe den grünen Schleim ein',       xp:80, gems:20, test:s=>s.stats.amoeba>=1},
+  {id:'magic', name:'Zauberlehrling',     d:'Verwandle 10 Steine in einer Zauberwand',xp:60,gems:15, test:s=>s.stats.mw>=10},
+  {id:'nopu',  name:'Puristisch',         d:'Schaffe ab Welt 5 eine Welt ohne Power-ups',xp:60,gems:15,test:s=>s.stats.nopu>=1},
+  {id:'rewind',name:'Nochmal!',           d:'Nutze einen Zeitsprung',                xp:20, gems:5,  test:s=>s.stats.rewinds>=1},
+  {id:'pb',    name:'Gegen dich selbst',  d:'Schlag deinen eigenen Geist',           xp:50, gems:10, test:s=>s.stats.pb>=1},
+  {id:'lvl10', name:'Erfahren',           d:'Erreiche Stufe 10',                     xp:0,  gems:30, test:s=>s.lvl>=10},
+  {id:'lvl25', name:'Veteran',            d:'Erreiche Stufe 25',                     xp:0,  gems:80, test:s=>s.lvl>=25},
+  {id:'av3',   name:'Verkleidungskünstler',d:'Besitze 3 Avatare',                    xp:40, gems:0,  test:s=>s.owned.length>=3},
+];
+const HINTS={
+  move:'Leg den Daumen auf die Steuerseite und zieh in eine Richtung, um zu laufen.',
+  rock:'Vorsicht! Ein Felsen über dir fällt, sobald unter ihm Platz ist. Weich zur Seite aus.',
+  push:'Felsen kannst du seitlich schieben, wenn dahinter frei ist.',
+  enemy:'Glühwürmer explodieren bei Berührung. Lass einen Felsen auf sie fallen!',
+  butter:'Schmetterlinge werden zu Diamanten, wenn ein Felsen sie trifft.',
+  amoeba:'Grüner Schleim wächst! Schließ ihn ein, dann wird er zu Diamanten. Wird er zu groß, versteinert er.',
+  magic:'Eine Zauberwand. Fällt ein Felsen hinein, kommt unten ein Diamant heraus, und umgekehrt. Sie summt nur eine Weile.',
+  chest:'Eine Truhe! Darin steckt Ausrüstung, die dich dauerhaft stärker macht.',
+  pu:'Power-up eingesammelt. Tipp rechts auf sein Symbol, um es einzusetzen.',
+  water:'Das Wasser steigt! Unter Wasser hast du nur 6 Sekunden Luft.',
+  grab:'GREIFEN halten und Richtung ziehen: Du gräbst oder sammelst, ohne dich zu bewegen. Gut gegen Felsen über dir!',
+  rewind:'Mit dem Zeitsprung spulst du ein paar Sekunden zurück, sogar direkt nach einem Unfall.',
+};
 
 /* ================= save ================= */
 const SAVE_KEY='boulderRush.save.v1';
 function defSave(){return{v:1,t:0,xp:0,lvl:1,sp:0,skills:{},pu:Object.fromEntries(PU_IDS.map(id=>[id,{l:1,f:0,c:id==='bomb'?1:0}])),
-  unlocked:1,stars:{},opts:{ctrl:'stick',side:'left',zoom:1,delay:true,sfx:2,mus:2,preview:true,haptic:true,scan:true},stats:{gems:0,deaths:0,kills:0,clears:0}}}
+  unlocked:1,stars:{},opts:{ctrl:'stick',side:'left',zoom:1,delay:true,sfx:2,mus:2,preview:true,haptic:true,scan:true,tips:true,ghost:true,map:false},
+  stats:{gems:0,deaths:0,kills:0,clears:0,chests:0,boss:0,bonus:0,daily:0,legend:0,amoeba:0,mw:0,nopu:0,rewinds:0,pb:0},
+  bank:0,gear:{eq:{},bag:[]},ach:{},hints:{},avatar:'kumpel',owned:['kumpel'],daily:{last:'',streak:0,max:0},best:{},opened:{}}}
 function fixSave(s){const d=defSave();if(!s||typeof s!=='object')return d;const o={...d,...s};
   o.opts={...d.opts,...(s.opts||{})};if(s.opts&&s.opts.sound===false&&s.opts.sfx===undefined){o.opts.sfx=0;o.opts.mus=0}delete o.opts.sound;o.stats={...d.stats,...(s.stats||{})};o.pu={};
   for(const id of PU_IDS)o.pu[id]={...d.pu[id],...((s.pu||{})[id]||{})};
-  o.skills={...(s.skills||{})};o.stars={...(s.stars||{})};return o}
+  for(const k of ['skills','stars','ach','hints','best','opened'])o[k]={...(s[k]||{})};
+  o.daily={...d.daily,...(s.daily||{})};
+  o.gear={eq:{...((s.gear||{}).eq||{})},bag:Array.isArray((s.gear||{}).bag)?s.gear.bag.slice():[]};
+  o.owned=Array.isArray(s.owned)&&s.owned.length?s.owned.slice():['kumpel'];
+  if(!AVATARS.some(a=>a.id===o.avatar))o.avatar='kumpel';return o}
 let save=defSave();
 try{const raw=localStorage.getItem(SAVE_KEY);if(raw)save=fixSave(JSON.parse(raw))}catch(e){}
 let dbDoc=null,dbBusy=false,dbDirty=false,dbTimer=0,cloudOK=false;
-function persist(){save.t=Date.now();try{localStorage.setItem(SAVE_KEY,JSON.stringify(save))}catch(e){}
+function persist(){checkAch();save.t=Date.now();try{localStorage.setItem(SAVE_KEY,JSON.stringify(save))}catch(e){}
   dbDirty=true;clearTimeout(dbTimer);dbTimer=setTimeout(flushDb,1500)}
 async function flushDb(){if(!dbDoc||!dbDirty||dbBusy)return;dbBusy=true;dbDirty=false;
   try{await dbDoc.set({t:save.t,json:JSON.stringify(save)})}catch(e){}
@@ -238,7 +376,15 @@ async function initCloud(){
   }catch(e){}
 }
 const sk=id=>save.skills[id]||0;
-const durMul=()=>1+0.2*sk('endure');
+const gearVal=slot=>{const it=save.gear.eq[slot];return it?GEAR[slot].vals[it.r]:0};
+const durMul=()=>1+0.2*sk('endure')+gearVal('lamp')/100;
+const xpMul=()=>1+.15*sk('hunter')+gearVal('charm')/100;
+let achBusy=false;
+function checkAch(){if(achBusy)return;achBusy=true;
+  try{for(const a of ACH){if(save.ach[a.id]||!a.test(save))continue;save.ach[a.id]=Date.now();
+    if(a.xp)addXP(a.xp,true);save.bank+=a.gems;
+    for(const av of AVATARS)if(av.ach===a.id&&!save.owned.includes(av.id))save.owned.push(av.id);
+    setTimeout(()=>{toast(`ERFOLG: ${a.name}`,true);sfx.ach()},400)}}finally{achBusy=false}}
 const needXP=l=>Math.round(80*Math.pow(l,1.35));
 const fragNeed=l=>Math.max(1,l*2+1-sk('tinker'));
 const maxCharges=l=>2+l;
@@ -290,6 +436,12 @@ const sfx={
   die(){tone(440,.6,'sawtooth',.08,0,-380)},
   lvl(){[659,784,988,1318,1568].forEach((f,i)=>tone(f,.14,'square',.06,i*.08))},
   tick(){tone(1800,.03,'square',.03)},
+  chest(){[392,494,587,784,988].forEach((f,i)=>tone(f,.12,'triangle',.07,i*.06));noise(.25,.08,1200,0,'bandpass',3000)},
+  magic(){[1318,1760,1318,2093].forEach((f,i)=>tone(f,.09,'sine',.05,i*.05))},
+  rewind(){tone(1400,.55,'sawtooth',.04,0,-1100);noise(.55,.06,4000,0,'bandpass',500)},
+  ach(){[784,988,1175,1568].forEach((f,i)=>tone(f,.14,'square',.05,i*.1))},
+  bubble(){tone(rnd(500,700),.08,'sine',.05,0,400)},
+  ooze(){noise(.12,.05,500,0,'lowpass',200)},
 };
 function buzz(ms){if(!save.opts.haptic)return;try{navigator.vibrate&&navigator.vibrate(ms)}catch(e){}}
 
@@ -348,31 +500,45 @@ document.addEventListener('visibilitychange',()=>{if(!ac)return;if(document.hidd
 function mk(n=16){const c=document.createElement('canvas');c.width=c.height=n;return c}
 function fromMap(map,pal,n=16,mirror=false){const c=mk(n),g=c.getContext('2d');
   map.forEach((row,y)=>{for(let x=0;x<row.length;x++){const ch=row[x];if(ch==='.'||!pal[ch])continue;g.fillStyle=pal[ch];g.fillRect(mirror?n-1-x:x,y,1,1)}});return c}
-const PLPAL={k:'#140c08',h:'#ffcc33',l:'#ffffff',s:'#f2b48a',b:'#3a7bd5',c:'#2a5aa5',p:'#2b3550',w:'#6b3f1d'};
-const PL_TOP=[
-"................",
-".....kkkkkk.....",
-"....khhhhhlk....",
-"...khhhhhhhhk...",
-"...kkkkkkkkkk...",
-"....kssssssk....",
-null,
-"....kssssssk....",
-".....kssssk.....",
-"....kbbbbbbk....",
-"...kbbbccbbbk...",
-"...ksbbccbbsk...",
-"....kbbbbbbk....",
-];
-function plFrame(eyes,legs,mirror){const m=PL_TOP.map(r=>r===null?eyes:r).concat(legs);return fromMap(m,PLPAL,16,mirror)}
-const EYES_F="....kskssksk....",EYES_R="....kssksksk....",EYES_B="....kkkkkkkk....";
-const LEG_STAND=["....kppkkppk....","...kppk..kppk...","...kwwk..kwwk..."];
-const LEG_A=["....kppkkppk....","..kppk....kppk..","..kwwk....kwwk.."];
-const LEG_B=["....kppppppk....",".....kppppk.....","....kwwwwwwk...."];
+const LEGS=[["....kPPkkPPk....","...kPPk..kPPk...","...kWWk..kWWk..."],
+  ["....kPPkkPPk....","..kPPk....kPPk..","..kWWk....kWWk.."],
+  ["....kPPPPPPk....",".....kPPPPk.....","....kWWWWWWk...."]];
+const fix16=r=>(r+'................').slice(0,16);
+function genPac(){const fr=(open,eye,m)=>{const c=mk(),g=c.getContext('2d');
+    for(let y=0;y<16;y++)for(let x=0;x<16;x++){const dx=x-7.5,dy=y-7.5,d=Math.hypot(dx,dy);if(d>7.3)continue;
+      if(dx>0&&Math.abs(Math.atan2(dy,dx))<open)continue;g.fillStyle=d>6.3?'#c89a10':'#ffe14d';g.fillRect(m?15-x:x,y,1,1)}
+    if(eye){g.fillStyle='#140c08';g.fillRect(m?7:8,3,1,2)}return c};
+  return{front:fr(.4,1),blink:fr(.4,0),r1:fr(.8,1),r2:fr(.08,1),l1:fr(.8,1,true),l2:fr(.08,1,true)}}
+function genGhost(){const fr=(look,ph,eyes,m)=>{const c=mk(),g=c.getContext('2d');
+    for(let y=1;y<16;y++)for(let x=1;x<15;x++){const dx=x-7.5,dy=y-7.5;if(y<8&&Math.hypot(dx,dy)>6.6)continue;
+      if(y===15&&(x+ph)%4<2)continue;g.fillStyle=Math.hypot(dx,dy)>6.2&&y<8?'#b0202a':'#ff3b4a';g.fillRect(x,y,1,1)}
+    if(eyes)for(const ex of [4,9]){g.fillStyle='#ffffff';g.fillRect(ex,5,3,4);g.fillStyle='#2040d0';g.fillRect(ex+1+look,6+(look?0:1),2,2)}
+    if(m){const c2=mk(),g2=c2.getContext('2d');g2.translate(16,0);g2.scale(-1,1);g2.drawImage(c,0,0);return c2}return c};
+  return{front:fr(0,0,1),blink:fr(0,0,0),r1:fr(1,0,1),r2:fr(1,2,1),l1:fr(1,0,1,true),l2:fr(1,2,1,true)}}
+function buildAvatar(id){const a=AVATARS.find(x=>x.id===id)||AVATARS[0];
+  if(a.gen==='pac')return genPac();if(a.gen==='ghost')return genGhost();
+  const pal={k:'#140c08',e:'#140c08',...a.pal},head=a.head.map(fix16),torso=a.torso.map(fix16),bh=head.map(r=>r.replace(/e/g,a.blink||'s'));
+  const leg=k=>(a.legs||LEGS[k]).map(fix16),fr=(h,k,m)=>fromMap(h.concat(torso,leg(k)),pal,16,m);
+  return{front:fr(head,0),blink:fr(bh,0),r1:fr(head,1),r2:fr(head,2),l1:fr(head,1,true),l2:fr(head,2,true)}}
+const avIcon={};
+function avatarIcon(id){return avIcon[id]||(avIcon[id]=buildAvatar(id).front.toDataURL())}
+function setAvatar(id){save.avatar=id;SPR.pl=buildAvatar(id)}
 const SPR={};
 function buildStatic(){
-  SPR.pl={front:plFrame(EYES_F,LEG_STAND),blink:plFrame(EYES_B,LEG_STAND),
-    r1:plFrame(EYES_R,LEG_A),r2:plFrame(EYES_R,LEG_B),l1:plFrame(EYES_R,LEG_A,true),l2:plFrame(EYES_R,LEG_B,true)};
+  SPR.pl=buildAvatar(save.avatar);
+  // amoeba
+  SPR.am=[];for(let k=0;k<2;k++){const c=mk(),g=c.getContext('2d'),r=rng(301+k);g.fillStyle='#1f7a1a';g.fillRect(0,0,16,16);
+    for(let n=0;n<26;n++){const x=(r()*15)|0,y=(r()*15)|0,s=r()<.5?2:3;g.fillStyle=['#3ec22f','#6ae85a','#2a9a22'][(n+k)%3];g.fillRect(x,y,s,s)}
+    g.fillStyle='#c8ffb0';for(let n=0;n<4;n++)g.fillRect((r()*14)|0,(r()*14)|0,1,1);SPR.am.push(c)}
+  // treasure chest
+  SPR.chest=fromMap(["................","................","...kkkkkkkkkk...","..kbbbbbbbbbbk..","..kbggbbbbggbk..","..kbbbbbbbbbbk..","..kkkkkyykkkkk..","..kbbbbyybbbbk..",
+    "..kbggbkkbggbk..","..kbbbbbbbbbbk..","..kbbbbbbbbbbk..","..kggbbbbbbggk..","..kkkkkkkkkkkk..","................","................","................"],{k:'#2a1608',b:'#8a5226',g:'#ffcc33',y:'#fff2a8'});
+  // magic wall, active shimmer frames and burnt-out
+  SPR.mw=[];for(let k=0;k<4;k++){const c=mk(),g=c.getContext('2d');
+    for(let y=0;y<16;y++)for(let x=0;x<16;x++){const row=y>>2,off=row%2?4:0,mortar=y%4===3||(x+off)%8===7;
+      g.fillStyle=mortar?'#1a0a30':(((x+y*3+k*4)%16)<3?'#e8d0ff':((x+k)%4<2?'#8a4aff':'#5a2ad0'));g.fillRect(x,y,1,1)}SPR.mw.push(c)}
+  {const c=mk(),g=c.getContext('2d');for(let y=0;y<16;y++)for(let x=0;x<16;x++){const row=y>>2,off=row%2?4:0;
+    g.fillStyle=(y%4===3||(x+off)%8===7)?'#111':'#2c2834';g.fillRect(x,y,1,1)}SPR.mwDead=c}
   // firefly
   SPR.fire=[];const fc=['#ff7a1a','#ffd23d','#ff3b1a','#fff2a8'];
   for(let k=0;k<4;k++){const c=mk(),g=c.getContext('2d');
@@ -398,6 +564,7 @@ function buildStatic(){
     freeze:["...w....","w..w..w.",".w.w.w..","..www...","wwwwwww.","..www...",".w.w.w..","w..w..w."],
     magnet:[".ww..ww.",".rr..rr.",".rr..rr.",".rr..rr.",".rrrrrr.","..rrrr..","........","........"],
     drill:["......w.",".....ww.","....ww..","...yy...","..yyy...",".yyy....","kyy.....","kk......"],
+    rewind:["wwwwwww.",".wyyyw..","..wyw...","...w....","..w.w...",".w.y.w..","wyyyyyw.","wwwwwww."],
   };
   const ICP={k:'#1a1210',w:'#ffffff',y:'#ffd23d',r:'#ff3b4a',c:'#3ab8ff'};
   SPR.pu={};SPR.puIcon={};
@@ -409,8 +576,8 @@ function buildStatic(){
     SPR.puIcon[id]=SPR.pu[id][0].toDataURL()}
 }
 let TH=null;
-function buildTheme(n){
-  const th=THEMES[Math.floor((n-1)/5)%THEMES.length];TH={...th,spr:{}};const s=TH.spr;
+function buildTheme(ti){
+  const th=THEMES[ti%THEMES.length];TH={...th,spr:{}};const s=TH.spr;
   s.dirt=[];for(let v=0;v<3;v++){const c=mk(),g=c.getContext('2d'),r=rng(11+v*31);g.fillStyle=th.dirt[0];g.fillRect(0,0,16,16);
     for(let y=0;y<16;y++)for(let x=0;x<16;x++){const q=r();if(q<.2){g.fillStyle=th.dirt[1];g.fillRect(x,y,1,1)}else if(q<.3){g.fillStyle=th.dirt[2];g.fillRect(x,y,1,1)}}
     for(let k=0;k<2;k++){const x=(r()*13)|0,y=(r()*13)|0;g.fillStyle=th.dirt[2];g.fillRect(x,y+1,3,2);g.fillStyle=th.dirt[1];g.fillRect(x,y,2,1)}
@@ -435,47 +602,59 @@ function buildTheme(n){
     s.gem.push(c)}
   s.exit=[];for(let k=0;k<2;k++){const c=mk(),g=c.getContext('2d');g.drawImage(s.steel,0,0);g.fillStyle='#000';g.fillRect(3,2,10,13);
     for(let y=3;y<15;y++){g.fillStyle=((y+k)%2)?'#ffffff':th.gem[0];g.fillRect(4,y,8,1)}s.exit.push(c)}
-  $('#gemIcon').src=s.gem[0].toDataURL();
+  {const c=mk(),g=c.getContext('2d');g.drawImage(s.brick,0,0);g.fillStyle='rgba(150,70,255,.35)';g.fillRect(0,0,16,16);g.fillStyle='#e8d0ff';g.fillRect(4,5,1,1);g.fillRect(11,9,1,1);s.mw=c}
+  $('#gemIcon').src=s.gem[0].toDataURL();if(!SPR.gemIcon)SPR.gemIcon=s.gem[0].toDataURL();
 }
 
 /* ================= level generation ================= */
-let lv=null,p=null,curStage=1,attempts=0,runTaken=new Set();
+let lv=null,p=null,curRun=null,attempts=0,runTaken=new Set();
+function dateKey(d=new Date()){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function dayNum(k){const [y,m,d]=k.split('-').map(Number);return Math.round(Date.UTC(y,m-1,d)/864e5)}
+// A run describes which level to build: a numbered world (every 10th is a bonus or boss world) or today's daily challenge
+function makeRun(mode,n){
+  if(mode==='daily'){const dk=dateKey(),num=dayNum(dk);return{mode,n:8+num%15,key:'d'+dk,date:dk,seed:num*131+7,theme:num%THEMES.length,special:null}}
+  return{mode:'world',n,key:'w'+n,seed:n*7919+1013,theme:Math.floor((n-1)/5)%THEMES.length,special:n%10===0?(n%20===10?'bonus':'boss'):null}}
 function newLv(w,h){const N=w*h;return{w,h,N,t:new Uint8Array(N),fall:new Uint8Array(N),dir:new Uint8Array(N),aux:new Uint8Array(N),
   stamp:new Uint32Array(N),mfrom:new Int32Array(N).fill(-1),mtick:new Uint32Array(N),pu:new Int8Array(N).fill(-1),puK:new Int16Array(N).fill(-1),
-  pocket:new Uint8Array(N),tick:1,chain:[],got:0,need:0,total:0,open:false,freezeT:0,timeLeft:0,pendXP:0,settling:false}}
+  pocket:new Uint8Array(N),tick:1,chain:[],got:0,need:0,total:0,open:false,freezeT:0,timeLeft:0,pendXP:0,settling:false,
+  amList:[],am:false,amMax:0,mw:0,mwT:0,water:false,wy:h,wRate:14,wDelay:30,chestTier:0}}
 function reach(L,start){const seen=new Uint8Array(L.N),q=[start];seen[start]=1;let gems=0,exit=false;
   while(q.length){const i=q.pop();for(let k=0;k<4;k++){const n=i+DX[k]+DY[k]*L.w;if(seen[n])continue;const t=L.t[n];
     if(L.pocket[n])continue;
-    if(t===D||t===E||t===G||t===P){seen[n]=1;if(t===G)gems++;q.push(n)}else if(t===X){seen[n]=1;exit=true}}}
+    if(t===D||t===E||t===G||t===P||t===CH){seen[n]=1;if(t===G)gems++;q.push(n)}else if(t===X){seen[n]=1;exit=true}}}
   return{seen,gems,exit}}
 function carve(L,a,b){const w=L.w,dist=new Int32Array(L.N).fill(1e9),prev=new Int32Array(L.N).fill(-1),bk=[[a]];dist[a]=0;
   outer:for(let c=0;c<bk.length;c++){const q=bk[c];if(!q)continue;for(let j=0;j<q.length;j++){const i=q[j];if(dist[i]!==c)continue;if(i===b)break outer;
-    for(let k=0;k<4;k++){const n=i+DX[k]+DY[k]*w,t=L.t[n];if(t===S||L.pocket[n]||t===F||t===B||(t===X&&n!==b))continue;
+    for(let k=0;k<4;k++){const n=i+DX[k]+DY[k]*w,t=L.t[n];if(t===S||L.pocket[n]||t===F||t===B||t===MW||t===AM||(t===X&&n!==b))continue;
       const nd=c+((t===R||t===W)?4:1);if(nd<dist[n]){dist[n]=nd;prev[n]=i;(bk[nd]||(bk[nd]=[])).push(n)}}}}
   if(prev[b]<0)return false;
   for(let i=prev[b];i!==a&&i>=0;i=prev[i]){const t=L.t[i];if(t===R||t===W)L.t[i]=D}
   return true}
-function genLevel(n){
-  const r=rng(n*7919+1013);
-  const w=Math.min(22+n*2,50),h=Math.min(14+Math.floor(n*1.2),30);
-  const L=newLv(w,h),t=L.t,idx=(x,y)=>y*w+x;
+function genLevel(run){
+  if(typeof run==='number')run=makeRun('world',run);
+  const n=run.n,sp=run.special,r=rng(run.seed),f=rng(run.seed^0x5bd1e995);
+  let w=Math.min(22+n*2,50),h=Math.min(14+Math.floor(n*1.2),30);
+  if(sp==='bonus'){w=26;h=16}else if(sp==='boss'){w=21;h=38}
+  const L=newLv(w,h),t=L.t,idx=(x,y)=>y*w+x;L.run=run;
   const diff=Math.min(n,25);
-  const pR=.085+diff*.004,pG=.055,pW=n>1?.015+diff*.002:.008,pE=.035;
+  let pR=.085+diff*.004,pG=.055,pW=n>1?.015+diff*.002:.008,pE=.035;
+  if(sp==='bonus'){pR=.07;pG=.28;pW=0;pE=.02}
   for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=idx(x,y);
     if(x===0||y===0||x===w-1||y===h-1){t[i]=S;continue}
     const q=r();t[i]=q<pR?R:q<pR+pG?G:q<pR+pG+pW?W:q<pR+pG+pW+pE?E:D}
   // brick lines
-  const lines=n<2?1:Math.min(1+Math.floor(n/2),8);
+  const lines=sp==='bonus'?0:n<2?1:Math.min(1+Math.floor(n/2),8);
   for(let k=0;k<lines;k++){const hor=r()<.65,len=4+Math.floor(r()*(hor?w/3:h/2));
     const x0=1+Math.floor(r()*(w-2)),y0=2+Math.floor(r()*(h-4)),gap=Math.floor(r()*len);
     for(let j=0;j<len;j++){if(j===gap)continue;const x=hor?x0+j:x0,y=hor?y0:y0+j;if(x>0&&x<w-1&&y>0&&y<h-1)t[idx(x,y)]=W}}
-  // player & exit
-  const px=2+Math.floor(r()*Math.max(1,w/4-2)),py=2+Math.floor(r()*(h-4));
-  const ex=w-2-Math.floor(r()*3),ey=1+Math.floor(r()*(h-2));
+  // player & exit (the boss world is a climb: start at the bottom, exit at the top)
+  let px,py,ex,ey;
+  if(sp==='boss'){px=Math.floor(w/2);py=h-3;ex=3+Math.floor(r()*(w-6));ey=1}
+  else{px=2+Math.floor(r()*Math.max(1,w/4-2));py=2+Math.floor(r()*(h-4));ex=w-2-Math.floor(r()*3);ey=1+Math.floor(r()*(h-2))}
   const exI=idx(ex,ey);t[exI]=X;L.exitI=exI;
   for(let d=0;d<4;d++){const i=exI+DX[d]+DY[d]*w;if(t[i]!==S)t[i]=D}
   // enemy pockets
-  const nEn=n<2?0:Math.min(Math.floor(n/2),9);let placed=0;
+  const nEn=sp==='bonus'?0:sp==='boss'?6:n<2?0:Math.min(Math.floor(n/2),9);let placed=0;
   for(let tries=0;tries<200&&placed<nEn;tries++){
     const len=3+Math.floor(r()*3),x=2+Math.floor(r()*(w-4-len)),y=2+Math.floor(r()*(h-4));
     if(Math.abs(x-px)+Math.abs(y-py)<Math.max(9,w/3))continue;
@@ -484,6 +663,13 @@ function genLevel(n){
     for(let yy=y-2;yy<=y+1;yy++)for(let xx=x-1;xx<=x+len;xx++){if(yy<1||yy>h-2||xx<1||xx>w-2)continue;const i=idx(xx,yy);
       if(yy===y&&xx>=x&&xx<x+len){t[i]=E;L.pocket[i]=1}else if(t[i]!==W&&t[i]!==S&&t[i]!==X){t[i]=D;L.pocket[i]=yy===y-2?0:1}}
     const e=idx(x+Math.floor(r()*len),y);t[e]=n>=3&&r()<.4?B:F;L.dir[e]=Math.floor(r()*4);placed++}
+  // special elements use their own random stream so older worlds keep their layout
+  const free=i=>t[i]!==S&&t[i]!==X&&!L.pocket[i];
+  if(!sp&&n>=8&&f()<.5){const len=5+Math.floor(f()*4),y=Math.floor(h*.35+f()*h*.3),x0=2+Math.floor(f()*(w-4-len));
+    for(let x=x0;x<x0+len;x++){const i=idx(x,y);if(!free(i)||Math.abs(x-px)+Math.abs(y-py)<3)continue;t[i]=MW;if(y+1<h-1&&free(i+w))t[i+w]=E}}
+  if(!sp&&n>=12&&f()<.4){for(let k=0;k<60;k++){const x=1+Math.floor(f()*(w-2)),y=1+Math.floor(f()*(h-2)),i=idx(x,y);
+      if(free(i)&&t[i]===D&&Math.abs(x-px)+Math.abs(y-py)>=12){t[i]=AM;L.am=true;L.amMax=Math.floor((w-2)*(h-2)*.07);break}}}
+  if(sp==='boss'||(!sp&&n>=16&&!L.am&&f()<.35)){L.water=true;L.wy=h-1;L.wRate=sp==='boss'?6.5:14;L.wDelay=sp==='boss'?8:30}
   // safe start
   for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const i=idx(px+dx,py+dy);if(t[i]!==S&&t[i]!==X&&!L.pocket[i])t[i]=D}
   for(let dy=2;dy<=4;dy++){const y=py-dy;if(y<1)break;const i=idx(px,y);if(t[i]===R||t[i]===G)t[i]=D}
@@ -500,16 +686,19 @@ function genLevel(n){
     const from=[];for(let i=0;i<L.N;i++)if(res.seen[i]&&t[i]!==X)from.push(i);
     let best=pI,bd=1e9;for(const i of from){const d=Math.abs(i%w-g%w)+Math.abs(((i/w)|0)-((g/w)|0));if(d<bd){bd=d;best=i}}
     carve(L,best,g);res=reach(L,pI)}
-  const frac=Math.min(.62,.45+n*.006);
+  const frac=sp==='bonus'?.5:sp==='boss'?.35:Math.min(.62,.45+n*.006);
   L.total=res.gems;L.need=clamp(Math.round(res.gems*frac),Math.min(5,res.gems),res.gems);
   L.reach=res.seen;
-  // power-ups
-  const fresh=!save.stars[n];
+  // power-ups and a treasure chest
+  const fresh=run.mode==='daily'||!save.stars[n];
   const nPU=fresh?1+(n%3===0?1:0)+sk('nose'):(r()<.5?1:0);
   const spots=[];for(let i=0;i<L.N;i++){if(t[i]===D&&res.seen[i]){const d=Math.abs(i%w-px)+Math.abs(((i/w)|0)-py);if(d>5)spots.push(i)}}
-  for(let k=0;k<nPU&&spots.length;k++){const j=Math.floor(r()*spots.length),i=spots.splice(j,1)[0];const type=Math.floor(r()*PU_IDS.length);
+  for(let k=0;k<nPU&&spots.length;k++){const j=Math.floor(r()*spots.length),i=spots.splice(j,1)[0];const type=f()<.12?5:Math.floor(r()*5);
     if(runTaken.has(k))continue;t[i]=P;L.pu[i]=type;L.puK[i]=k}
-  L.timeLimit=Math.round(90+w*h/6)+sk('time')*15;L.timeLeft=L.timeLimit;
+  if(!save.opened[run.key]&&!runTaken.has(100)&&(run.mode==='daily'||sp||(n>=3&&fresh&&f()<.3))){
+    const far=spots.filter(i=>Math.abs(i%w-px)+Math.abs(((i/w)|0)-py)>8);const pool=far.length?far:spots;
+    if(pool.length){const i=pool[Math.floor(f()*pool.length)];t[i]=CH;L.chestTier=sp||run.mode==='daily'?1:0}}
+  L.timeLimit=(sp==='bonus'?80:sp==='boss'?190:Math.round(90+w*h/6))+sk('time')*15+gearVal('boots');L.timeLeft=L.timeLimit;
   return L}
 
 /* ================= simulation ================= */
@@ -518,24 +707,39 @@ function physics(L){ // returns whether anything moved (used for settling)
   L.tick++;let moved=false;const t=L.t,w=L.w;
   if(L.chain.length){const c=L.chain;L.chain=[];for(const [x,y,g,src] of c)explodeAt(x,y,g,src||'enemy',1)}
   if(!L.settling&&p&&!p.dead)updPlayer();
-  const frozen=L.freezeT>0&&!L.settling;
+  const frozen=L.freezeT>0&&!L.settling,am=L.amList,wet=L.water?Math.ceil(L.wy):1e9;am.length=0;
   for(let y=L.h-2;y>=1;y--)for(let x=1;x<w-1;x++){const i=y*w+x;if(L.stamp[i]===L.tick)continue;const tt=t[i];
     if(tt===R||tt===G){if(!frozen&&updFall(L,i))moved=true}
-    else if(tt===F||tt===B){if(!frozen&&!L.settling)updEnemy(L,i,x,y,tt)}
+    else if(tt===F||tt===B){if(L.settling)continue;if(y>=wet){explodeAt(x,y,tt===B,'bomb',0);continue}if(!frozen)updEnemy(L,i,x,y,tt)}
+    else if(tt===AM)am.push(i);
     else if(tt===EX){const c=(L.aux[i]&15)+1;if(c>=4){t[i]=(L.aux[i]&16)?G:E;L.aux[i]=0}else L.aux[i]=(L.aux[i]&16)|c}}
+  if(am.length&&!L.settling&&!frozen)updAmoeba(L,am);
   return moved}
+// Amoeba: grows into dirt and space; fully enclosed it turns into diamonds, too big it petrifies into rocks
+function updAmoeba(L,am){const t=L.t,w=L.w;
+  if(am.length>L.amMax){for(const i of am){t[i]=R;L.fall[i]=0}L.am=false;toast('Der Schleim ist versteinert!');sfx.rock();shake(3);return}
+  let room=false;
+  for(const i of am)for(let k=0;k<4;k++){const n=i+DX[k]+DY[k]*w,tn=t[n];
+    if(tn===E||tn===D)room=true;else if(tn===F||tn===B)explodeAt(n%w,(n/w)|0,tn===B,'enemy',1)}
+  if(!room){for(const i of am){t[i]=G;L.fall[i]=0}L.am=false;save.stats.amoeba++;toast('Schleim eingeschlossen: alles Diamanten!',true);sfx.open();flash=.6;return}
+  const pr=L.timeLimit-L.timeLeft>45?.05:.012;
+  for(const i of am){if(Math.random()<pr){const k=(Math.random()*4)|0,n=i+DX[k]+DY[k]*w;if(t[n]===E||t[n]===D){t[n]=AM;L.stamp[n]=L.tick;L.mfrom[n]=-1;if(Math.random()<.3)sfx.ooze()}}}}
 function updFall(L,i){const t=L.t,w=L.w,bl=i+w,tb=t[bl];
   if(tb===E){mv(L,i,bl);L.fall[bl]=1;return true}
   if(L.fall[i]&&!L.settling){
     if(tb===PL){L.fall[i]=0;if(hurt('rock')){explodeAt(bl%w,(bl/w)|0,false,'death',1)}else{sfx.rock();shake(4)}return false}
-    if(tb===F||tb===B){explodeAt(bl%w,(bl/w)|0,tb===B,'rock',1);return false}}
-  if(tb===R||tb===G||tb===W){
+    if(tb===F||tb===B){explodeAt(bl%w,(bl/w)|0,tb===B,'rock',1);return false}
+    if(tb===MW&&L.mw!==2){if(!L.mw){L.mw=1;L.mwT=15;sfx.magic()}
+      const o=bl+w,nt=t[i]===R?G:R;t[i]=E;L.fall[i]=0;
+      if(t[o]===E){t[o]=nt;L.fall[o]=1;L.stamp[o]=L.tick;L.mfrom[o]=-1;burst(o%w+.5,((o/w)|0)+.2,'#c8a0ff',4)}
+      save.stats.mw++;return true}}
+  if(tb===R||tb===G||tb===W||tb===CH){
     if(t[i-1]===E&&t[bl-1]===E){mv(L,i,i-1);L.fall[i-1]=1;return true}
     if(t[i+1]===E&&t[bl+1]===E){mv(L,i,i+1);L.fall[i+1]=1;return true}}
   if(L.fall[i]){L.fall[i]=0;if(!L.settling){if(t[i]===R){sfx.rock();shake(1.5)}else sfx.clink()}}
   return false}
 function updEnemy(L,i,x,y,type){const t=L.t,w=L.w;
-  for(let k=0;k<4;k++){if(t[i+DX[k]+DY[k]*w]===PL){explodeAt(x,y,type===B,'enemy',1);return}}
+  for(let k=0;k<4;k++){const tn=t[i+DX[k]+DY[k]*w];if(tn===PL||tn===AM){explodeAt(x,y,type===B,'enemy',1);return}}
   const d=L.dir[i],tl=type===F?(d+3)&3:(d+1)&3;let n=i+DX[tl]+DY[tl]*w;
   if(t[n]===E){L.dir[i]=tl;mv(L,i,n);return}
   n=i+DX[d]+DY[d]*w;if(t[n]===E){mv(L,i,n);return}
@@ -543,7 +747,7 @@ function updEnemy(L,i,x,y,type){const t=L.t,w=L.w;
 function explodeAt(cx,cy,toGem,src,r){const L=lv,t=L.t,w=L.w;let hurtChecked=false;const rx=Array.isArray(r)?r[0]:r,ry=Array.isArray(r)?r[1]:r;r=Math.max(rx,ry);
   if(!L.settling){sfx.boom();shake(src==='bomb'?6+r*2:7);buzz(src==='death'?220:60)}
   for(let dy=-ry;dy<=ry;dy++)for(let dx=-rx;dx<=rx;dx++){const x=cx+dx,y=cy+dy;if(x<0||y<0||x>=w||y>=L.h)continue;const i=y*w+x,tt=t[i];
-    if(tt===S||tt===X)continue;
+    if(tt===S||tt===X||tt===CH)continue;
     if(src==='bomb'&&(tt===G||tt===P||tt===PL))continue;
     if(tt===PL&&src!=='death'){if(hurtChecked||p.dead){}else{hurtChecked=true;if(!hurt('blast'))continue}
       if(!p.dead)continue}
@@ -554,15 +758,26 @@ function killEnemy(tt,x,y){const xp=tt===B?20:15;lv.pendXP+=xp;save.stats.kills+
 function hurt(cause){
   if(lv.settling||p.dead)return false;
   if(p.shieldT>0)return false;
-  if(cause==='rock'&&p.helm>0){p.helm--;toast('Der Helm hat dich gerettet!');return false}
+  if(cause==='rock'&&p.helm>0){p.helm--;toast('Der Grubenhelm hat dich gerettet!');return false}
+  if(cause==='rock'&&Math.random()*100<gearVal('helmet')){toast(`Glück gehabt: ${gearName(save.gear.eq.helmet)} hält!`);return false}
   if(p.chance>0){p.chance--;p.shieldT=2.5;toast('Zweite Chance!');return false}
   die();return true}
-function die(){p.dead=true;state='dead';deadT=1.7;sfx.die();save.stats.deaths++;persist()}
+function die(){p.dead=true;state='dead';deadT=deadMax=1.7;sfx.die();save.stats.deaths++;
+  if(save.pu.rewind.c>0&&snaps.length){deadT=deadMax=3.4;setTimeout(()=>{if(state==='dead')toast('Zeitsprung? Tipp auf die Sanduhr!',true)},350)}persist()}
 function takeGem(i,x,y){let c=1;if(Math.random()<sk('luck')*.1){c=2;floatTxt(x+.5,y,'×2',TH.gem[1])}
   const wasOpen=lv.open;lv.got+=c;lv.pendXP+=(wasOpen?3:2)*c;save.stats.gems+=c;
   burst(x+.5,y+.5,TH.gem[0],6);sfx.gem();buzz(8);
   if(!lv.open&&lv.got>=lv.need){lv.open=true;sfx.open();toast('Der Ausgang ist offen!');flash=1}}
-function takePU(i){const id=PU_IDS[lv.pu[i]],s=save.pu[id];runTaken.add(lv.puK[i]);
+function takeChest(i){runTaken.add(100);save.opened[curRun.key]=1;const wts=lv.chestTier?[0,50,38,12]:[60,28,10,2];
+  let q=Math.random()*100,r=0;while(r<3&&q>=wts[r]){q-=wts[r];r++}
+  const it={s:GEAR_IDS[Math.floor(Math.random()*GEAR_IDS.length)],r},cur=save.gear.eq[it.s];let where;
+  save.stats.chests++;if(r===3)save.stats.legend++;
+  if(!cur||r>cur.r){if(cur)bagAdd(cur);save.gear.eq[it.s]=it;where='angelegt'}else{bagAdd(it);where='in der Tasche'}
+  sfx.chest();buzz(40);burst(i%lv.w+.5,((i/lv.w)|0)+.5,RAR[r][1],18);if(r>=2)flash=.5;
+  toast(`Truhe: ${gearName(it)} (${RAR[r][0]}), ${where}`,true);persist()}
+function bagAdd(it){const bag=save.gear.bag;bag.push(it);
+  if(bag.length>16){let k=0;bag.forEach((b,j)=>{if(b.r<bag[k].r)k=j});save.bank+=SCRAP[bag.splice(k,1)[0].r]}}
+function takePU(i){const id=PU_IDS[lv.pu[i]],s=save.pu[id];runTaken.add(lv.puK[i]);hint(id==='rewind'?'rewind':'pu');
   s.c=Math.min(maxCharges(s.l),s.c+1);let msg=`${PU[id].name} +1`;
   if(s.l<5){s.f++;if(s.f>=fragNeed(s.l)){s.f=0;s.l++;s.c=Math.min(maxCharges(s.l),s.c+1);msg=`${PU[id].name} aufgewertet: Stufe ${s.l}!`;sfx.lvl()}}
   else msg+=' (max. Stufe)';
@@ -573,8 +788,10 @@ function updPlayer(){const L=lv,t=L.t,w=L.w;const d=takeDir();
   if(d<0){p.push=0;return}
   p.face=d;if(d===1||d===3)p.hface=d;
   const i=L.pI,n=i+DX[d]+DY[d]*w,tn=t[n],nx=n%w,ny=(n/w)|0;const grab=inp.grab;
-  if(tn===D||tn===E||tn===G||tn===P||(tn===W&&p.drillT>0)){
-    if(tn===G)takeGem(n,nx,ny);else if(tn===P)takePU(n);else if(tn===E)sfx.step();else if(tn===D){sfx.dig();if(Math.random()<.5)burst(nx+.5,ny+.6,TH.dirt[1],2)}else if(tn===W){sfx.brick();burst(nx+.5,ny+.5,TH.brick[1],5)}
+  if(tn===D||tn===E||tn===G||tn===P||tn===CH||(tn===W&&p.drillT>0)){
+    if(tn===G)takeGem(n,nx,ny);else if(tn===P)takePU(n);else if(tn===CH)takeChest(n);else if(tn===E)sfx.step();
+    else if(tn===D){sfx.dig();if(Math.random()<.5)burst(nx+.5,ny+.6,TH.dirt[1],2);if(Math.random()*100<gearVal('pick')){takeGem(n,nx,ny);floatTxt(nx+.5,ny,'Fund!',TH.gem[1])}}
+    else if(tn===W){sfx.brick();burst(nx+.5,ny+.5,TH.brick[1],5)}
     if(grab){t[n]=E;L.pu[n]=-1}else{mv(L,i,n);p.lastMove=L.tick;fingers()}
     p.push=0;return}
   if(tn===X&&L.open&&!grab){mv(L,i,n);p.lastMove=L.tick;stageClear();return}
@@ -595,8 +812,10 @@ function enemyAmbience(){const L=lv,w=L.w,px=L.pI%w,py=(L.pI/w)|0;let best=99,ty
   for(let y=Math.max(1,py-6);y<=Math.min(L.h-2,py+6);y++)for(let x=Math.max(1,px-6);x<=Math.min(w-2,px+6);x++){const tt=L.t[y*w+x];
     if(tt===F||tt===B){const d=Math.abs(x-px)+Math.abs(y-py);if(d<best){best=d;type=tt}}}
   if(best<=6)(type===F?sfx.buzzE:sfx.flutter)(best)}
-function usePU(id){if(state!=='play'||!p||p.dead)return;const s=save.pu[id];if(s.c<=0){sfx.err();buzz(20);return}
-  s.c--;persist();const l=s.l,m=durMul();
+function usePU(id){if(!p||!(state==='play'&&!p.dead||state==='dead'&&id==='rewind'))return;const s=save.pu[id];
+  if(s.c<=0||id==='rewind'&&!snaps.length){sfx.err();buzz(20);return}
+  s.c--;p.usedPU=true;if(id==='rewind'){doRewind(s.l);persist();updPUBar();return}
+  persist();const l=s.l,m=durMul();
   if(id==='bomb'){const bw=(BOMB_W[l-1]-1)/2,bd=(BOMB_D[l-1]-1)/2,d=p.face,w=lv.w,hor=d===1||d===3;explodeAt(lv.pI%w+DX[d]*(bd+1),((lv.pI/w)|0)+DY[d]*(bd+1),false,'bomb',hor?[bd,bw]:[bw,bd])}
   else if(id==='shield')p.shieldT=Math.max(p.shieldT,(4+2*l)*m);
   else if(id==='freeze')lv.freezeT=(3+1.5*l)*m;
@@ -605,13 +824,30 @@ function usePU(id){if(state!=='play'||!p||p.dead)return;const s=save.pu[id];if(s
   if(id!=='bomb')sfx[id]();buzz(25);updPUBar()}
 function tick(){
   physics(lv);
-  if(state==='play'){const dt=TICK/1000;
-    p.shieldT=Math.max(0,p.shieldT-dt);p.magnetT=Math.max(0,p.magnetT-dt);p.drillT=Math.max(0,p.drillT-dt);lv.freezeT=Math.max(0,lv.freezeT-dt);
-    const before=Math.ceil(lv.timeLeft);lv.timeLeft-=dt;const now=Math.ceil(lv.timeLeft);
+  if(state==='play'){const dt=TICK/1000,L=lv;
+    p.shieldT=Math.max(0,p.shieldT-dt);p.magnetT=Math.max(0,p.magnetT-dt);p.drillT=Math.max(0,p.drillT-dt);L.freezeT=Math.max(0,L.freezeT-dt);
+    const before=Math.ceil(L.timeLeft);L.timeLeft-=dt;const now=Math.ceil(L.timeLeft);
     if(now!==before&&now<=10&&now>0)sfx.tick();
-    if(lv.tick%5===0&&lv.freezeT<=0)enemyAmbience();
-    if(lv.timeLeft<=0&&!p.dead){lv.timeLeft=0;p.shieldT=0;p.chance=0;toast('Die Zeit ist abgelaufen!');die();explodeAt(lv.pI%lv.w,(lv.pI/lv.w)|0,false,'death',1)}}
+    if(L.tick%5===0&&L.freezeT<=0)enemyAmbience();
+    if(L.mw===1){L.mwT-=dt;if(L.mwT<=0)L.mw=2}
+    if(L.water&&L.freezeT<=0){if(L.wDelay>0)L.wDelay-=dt;else{L.wy=Math.max(1,L.wy-dt/L.wRate);hint('water')}}
+    if(L.water&&!p.dead){if(((L.pI/L.w)|0)>=Math.ceil(L.wy)){p.air-=dt;if(L.tick%4===0)sfx.bubble();
+        if(p.air<=0){p.air=0;p.shieldT=0;p.chance=0;toast('Keine Luft mehr!');die();explodeAt(L.pI%L.w,(L.pI/L.w)|0,false,'death',1)}}
+      else p.air=Math.min(6,p.air+dt*2)}
+    if(L.timeLeft<=0&&!p.dead){L.timeLeft=0;p.shieldT=0;p.chance=0;toast('Die Zeit ist abgelaufen!');die();explodeAt(L.pI%L.w,(L.pI/L.w)|0,false,'death',1)}
+    if(state==='play'){ghostRec.push(L.pI);snapTake();if(L.tick%3===0)checkHints()}}
   else if(state==='dead'){deadT-=TICK/1000;if(deadT<=0)restartStage()}}
+// Rewind: a ring buffer of the last ~5 seconds of play
+let snaps=[],ghostRec=[],ghost=null,deadMax=1.7;
+function snapTake(){const L=lv;snaps.push({t:L.t.slice(),fall:L.fall.slice(),dir:L.dir.slice(),aux:L.aux.slice(),pu:L.pu.slice(),puK:L.puK.slice(),
+  pI:L.pI,got:L.got,pendXP:L.pendXP,open:L.open,timeLeft:L.timeLeft,freezeT:L.freezeT,wy:L.wy,wDelay:L.wDelay,mw:L.mw,mwT:L.mwT,am:L.am,chain:L.chain.slice(),p:{...p},rec:ghostRec.length});
+  if(snaps.length>40)snaps.shift()}
+function doRewind(l){const back=Math.round(REW_S[l-1]*1000/TICK),k=Math.max(0,snaps.length-1-back),z=snaps[k],L=lv;snaps.length=k;
+  for(const a of ['t','fall','dir','aux','pu','puK'])L[a].set(z[a]);
+  for(const a of ['pI','got','pendXP','open','timeLeft','freezeT','wy','wDelay','mw','mwT','am'])L[a]=z[a];
+  L.chain=z.chain;p={...z.p,usedPU:true};ghostRec.length=z.rec;
+  for(let i=0;i<L.N;i++){if(L.t[i]===P&&runTaken.has(L.puK[i])){L.t[i]=E;L.pu[i]=-1}else if(L.t[i]===CH&&runTaken.has(100))L.t[i]=E}
+  L.mfrom.fill(-1);state='play';deadT=0;acc=0;inp.q=[];save.stats.rewinds++;flash=.8;shk=0;sfx.rewind();buzz(40);toast('Zeitsprung!')}
 
 /* ================= input ================= */
 const inp={held:-1,q:[],grab:false,wait:0};
@@ -647,7 +883,7 @@ const keys=[];const KMAP={ArrowUp:0,KeyW:0,ArrowRight:1,KeyD:1,ArrowDown:2,KeyS:
 addEventListener('keydown',e=>{if(e.repeat)return;if(state==='intro'){skipIntro();return}const d=KMAP[e.code];
   if(d!==undefined){e.preventDefault();ensureAc();if(!keys.includes(d))keys.push(d);setDir(d)}
   else if(e.code==='ShiftLeft'||e.code==='ShiftRight'||e.code==='Space'){inp.grab=true;grabBtn.classList.add('on');e.preventDefault()}
-  else if(/^Digit[1-5]$/.test(e.code))usePU(PU_IDS[+e.code.slice(5)-1]);
+  else if(/^Digit[1-6]$/.test(e.code))usePU(PU_IDS[+e.code.slice(5)-1]);
   else if(e.code==='Escape'||e.code==='KeyP'){if(state==='play')pauseGame();else if(state==='pause')resumeGame()}});
 addEventListener('keyup',e=>{const d=KMAP[e.code];
   if(d!==undefined){const k=keys.indexOf(d);if(k>=0)keys.splice(k,1);setDir(keys.length?keys[keys.length-1]:-1)}
@@ -655,6 +891,7 @@ addEventListener('keyup',e=>{const d=KMAP[e.code];
 addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&state==='play')pauseGame()});
 $('#skipBtn').addEventListener('click',()=>skipIntro());
+$('#mapBtn').addEventListener('click',()=>{save.opts.map=!save.opts.map;$('#mapBtn').classList.toggle('on',save.opts.map);persist()});
 $('#pauseBtn').addEventListener('click',()=>{if(state==='intro')skipIntro();else if(state==='play')pauseGame()});
 
 /* ================= rendering ================= */
@@ -674,6 +911,8 @@ function drawTile(tt,i,x,y,now,L){const s=TH.spr;let im=null;
     case F:im=SPR.fire[Math.floor(now/90)%4];break;case B:im=SPR.butter[[0,1,2,1][Math.floor(now/110)%4]];break;
     case P:{const id=PU_IDS[L.pu[i]];if(id){const bob=Math.round(Math.sin(now/200+i)*DT/16)|0;ctx.drawImage(SPR.pu[id][Math.floor(now/300)%2],x,y+bob,DT,DT)}return}
     case EX:im=SPR.ex[Math.min(3,L.aux[i]&15)];break;
+    case AM:im=SPR.am[(Math.floor(now/400)+i)%2];break;case CH:im=SPR.chest;break;
+    case MW:im=L.mw===1?SPR.mw[Math.floor(now/80)%4]:L.mw===2?SPR.mwDead:s.mw;break;
     case PL:{let f=SPR.pl.front;const moving=L.tick-p.lastMove<=1;
       if(moving)f=(p.hface===3?(L.tick%2?SPR.pl.l1:SPR.pl.l2):(L.tick%2?SPR.pl.r1:SPR.pl.r2));else if(now%3200<140)f=SPR.pl.blink;
       if(p.drillT>0&&!moving)f=(p.hface===3?SPR.pl.l1:SPR.pl.r1);
@@ -708,13 +947,13 @@ function introCam(){const{W2,H2}=camView();let t=intro.t,k=0;
   const z=Math.exp(Math.log(A[2])+(Math.log(B[2])-Math.log(A[2]))*e),cx=A[0]+(B[0]-A[0])*e,cy=A[1]+(B[1]-A[1])*e;
   return[cx*TS*z-W2/2,cy*TS*z-H2/2,z]}
 function endIntro(){if(state!=='intro')return;intro.t=introLen();const c=introCam();camX=c[0];camY=c[1];camSnap=false;
-  intro=null;state='play';acc=0;inp.q=[];sfx.start();$('#ctl').classList.remove('intro');$('#skipBtn').hidden=true;$('#banner').classList.remove('top');banner('LOS!',700)}
+  intro=null;state='play';acc=0;inp.q=[];sfx.start();startHints();$('#ctl').classList.remove('intro');$('#skipBtn').hidden=true;$('#banner').classList.remove('top');banner('LOS!',700)}
 function introMarkers(x0,x1,y0,y1,ts,now){const L=lv,w=L.w,pulse=.75+.25*Math.sin(now/160),r0=Math.max(ts*.8,7*dpr)*pulse;
   ctx.lineWidth=Math.max(2,2*dpr);ctx.textAlign='center';ctx.font=`${Math.round(8*dpr)}px "Press Start 2P", monospace`;
   const ring=(x,y,col,label)=>{const cx=(x+.5)*ts,cy=(y+.5)*ts;ctx.strokeStyle=col;ctx.beginPath();ctx.arc(cx,cy,r0,0,6.283);ctx.stroke();
     if(label){ctx.fillStyle='#000';ctx.fillText(label,cx+dpr,cy-r0-5*dpr+dpr);ctx.fillStyle=col;ctx.fillText(label,cx,cy-r0-5*dpr)}};
   for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){const i=y*w+x,tt=L.t[i];
-    if(tt===X)ring(x,y,'#7bea6a','AUSGANG');else if(tt===P)ring(x,y,PU[PU_IDS[L.pu[i]]].col);else if(tt===F||tt===B)ring(x,y,'#ff5d73');else if(tt===PL)ring(x,y,'#ffcc33','DU')}}
+    if(tt===X)ring(x,y,'#7bea6a','AUSGANG');else if(tt===CH)ring(x,y,'#ffcc33','TRUHE');else if(tt===AM&&L.amList.length<2)ring(x,y,'#3ec22f','SCHLEIM');else if(tt===P)ring(x,y,PU[PU_IDS[L.pu[i]]].col);else if(tt===F||tt===B)ring(x,y,'#ff5d73');else if(tt===PL)ring(x,y,'#ffcc33','DU')}}
 function skipIntro(){if(state==='intro')endIntro()}
 function draw(now,dt){const W2=cv.width,H2=cv.height;ctx.fillStyle='#000';ctx.fillRect(0,0,W2,H2);
   if(!lv||!TH)return;const L=lv,w=L.w,a=(state==='play'||state==='dead')?clamp(acc/TICK,0,1):1;
@@ -735,6 +974,11 @@ function draw(now,dt){const W2=cv.width,H2=cv.height;ctx.fillStyle='#000';ctx.fi
     if(L.mtick[i]===L.tick&&L.mfrom[i]>=0&&tt!==EX){movers.push(i);continue}
     drawTile(tt,i,Math.round(x*ts),Math.round(y*ts),now,L)}
   for(const i of movers){const f=L.mfrom[i],fx=f%w,fy=(f/w)|0,x=i%w,y=(i/w)|0;drawTile(L.t[i],i,Math.round((fx+(x-fx)*a)*ts),Math.round((fy+(y-fy)*a)*ts),now,L)}
+  if(ghost&&state!=='intro'){const k=Math.min(ghost.length-1,Math.max(0,ghostRec.length-1)),g1=ghost[k],g0=ghost[Math.max(0,k-1)],
+      ga=k<ghost.length-1||ghostRec.length-1<=k?a:1,gx=g0%w+(g1%w-g0%w)*ga,gy=((g0/w)|0)+(((g1/w)|0)-((g0/w)|0))*ga;
+    ctx.globalAlpha=ghostRec.length>ghost.length?.18:.38;ctx.drawImage(SPR.pl.front,Math.round(gx*ts),Math.round(gy*ts),DT,DT);ctx.globalAlpha=1}
+  if(L.water){const wy=Math.ceil(L.wy),yT=wy*ts;if(wy<L.h){ctx.fillStyle='rgba(40,110,255,.32)';ctx.fillRect(0,yT,mapW,mapH-yT);
+    ctx.fillStyle='rgba(150,210,255,.7)';const q=Math.max(2,ts/8);for(let x=0;x<w*2;x++){const off=Math.sin(now/300+x)*q;ctx.fillRect(x*ts/2,yT+off-q/2,ts/2,q)}}}
   if(sk('sense')&&Math.floor(now/250)%2){ctx.fillStyle='#ff3b4a';const q=Math.max(2,ts/8);
     for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){const i=y*w+x,tt=L.t[i];
       if((tt===R||tt===G)&&(L.t[i+w]===E||L.fall[i]||L.t[i+w]===PL)&&y<L.h-1){const X0=x*ts,Y0=y*ts;ctx.fillRect(X0,Y0,q,q);ctx.fillRect(X0+ts-q,Y0,q,q);ctx.fillRect(X0,Y0+ts-q,q,q);ctx.fillRect(X0+ts-q,Y0+ts-q,q,q)}}}
@@ -749,21 +993,40 @@ function draw(now,dt){const W2=cv.width,H2=cv.height;ctx.fillStyle='#000';ctx.fi
   ctx.restore();
   if(L.freezeT>0){ctx.fillStyle='rgba(120,140,255,.14)';ctx.fillRect(0,0,W2,H2)}
   if(flash>0){ctx.fillStyle=`rgba(255,255,255,${flash*.35})`;ctx.fillRect(0,0,W2,H2);flash=Math.max(0,flash-sec*3)}
-  if(state==='dead'){ctx.fillStyle=`rgba(80,0,10,${.25*(1-deadT/1.7)})`;ctx.fillRect(0,0,W2,H2)}}
+  if(state==='dead'){ctx.fillStyle=`rgba(80,0,10,${.25*clamp(1-deadT/deadMax,0,1)})`;ctx.fillRect(0,0,W2,H2)}
+  if(save.opts.map&&(state==='play'||state==='dead'||state==='pause'))drawMinimap(now,ts)}
+// Minimap: one pixel per tile, scaled up, top right below the HUD
+const mmC=document.createElement('canvas'),mmG=mmC.getContext('2d');let mmImg=null,mmT=0;
+const hex=c=>[parseInt(c.slice(1,3),16),parseInt(c.slice(3,5),16),parseInt(c.slice(5,7),16)];
+function drawMinimap(now,ts){const L=lv,w=L.w,h=L.h;
+  if(mmC.width!==w||mmC.height!==h){mmC.width=w;mmC.height=h;mmImg=mmG.createImageData(w,h);mmT=0}
+  if(now-mmT>150){mmT=now;const d=mmImg.data,th=TH,C={};
+    C[E]=hex(th.bg);C[D]=hex(th.dirt[0]);C[W]=hex(th.brick[0]);C[S]=hex(STEEL[0]);C[R]=hex(th.rock[1]);C[G]=hex(th.gem[0]);C[X]=L.open?[123,234,106]:hex(STEEL[1]);
+    C[F]=[255,122,26];C[B]=[255,79,216];C[P]=[255,255,255];C[EX]=[255,180,61];C[PL]=Math.floor(now/250)%2?[255,204,51]:[255,255,255];C[AM]=[62,194,47];C[MW]=[150,90,255];C[CH]=[255,204,51];
+    const wet=L.water?Math.ceil(L.wy):1e9;
+    for(let i=0;i<L.N;i++){const c=C[L.t[i]]||C[E],o=i*4,uw=((i/w)|0)>=wet;d[o]=uw?c[0]*.5:c[0];d[o+1]=uw?c[1]*.6+40:c[1];d[o+2]=uw?Math.min(255,c[2]*.6+110):c[2];d[o+3]=235}
+    mmG.putImageData(mmImg,0,0)}
+  const sc=Math.max(1,Math.floor(Math.min(130*dpr/w,90*dpr/h))),mw=w*sc,mh=h*sc,x=cv.width-mw-10*dpr,y=56*dpr;
+  ctx.fillStyle='#000a';ctx.fillRect(x-2*dpr,y-2*dpr,mw+4*dpr,mh+4*dpr);ctx.drawImage(mmC,x,y,mw,mh);
+  ctx.save();ctx.beginPath();ctx.rect(x,y,mw,mh);ctx.clip();ctx.strokeStyle='#ffffff90';ctx.lineWidth=Math.max(1,dpr);
+  ctx.strokeRect(x+camX/ts*sc,y+(camY+48*dpr)/ts*sc,cv.width/ts*sc,(cv.height-48*dpr)/ts*sc);ctx.restore()}
 
 /* ================= HUD ================= */
 let hudCache='';
 function hudUpdate(){const xpw=Math.min(100,save.xp/needXP(save.lvl)*100);$('#xpbar i').style.width=xpw+'%';
   if(!lv||state==='menu')return;
-  const t=Math.ceil(lv.timeLeft),key=[curStage,lv.got,lv.need,lv.open,t,p.shieldT>0?Math.ceil(p.shieldT):0,lv.freezeT>0?Math.ceil(lv.freezeT):0,p.magnetT>0?Math.ceil(p.magnetT):0,p.drillT>0?Math.ceil(p.drillT):0,p.helm].join();
+  const uw=lv.water&&((lv.pI/lv.w)|0)>=Math.ceil(lv.wy);
+  const t=Math.ceil(lv.timeLeft),key=[curRun.key,lv.got,lv.need,lv.open,t,p.shieldT>0?Math.ceil(p.shieldT):0,lv.freezeT>0?Math.ceil(lv.freezeT):0,p.magnetT>0?Math.ceil(p.magnetT):0,p.drillT>0?Math.ceil(p.drillT):0,p.helm,uw?Math.ceil(p.air):-1,lv.mw===1?Math.ceil(lv.mwT):0].join();
   if(key===hudCache)return;hudCache=key;
-  $('#hStage').textContent='W'+curStage;$('#hGems span').textContent=lv.got+'/'+lv.need;$('#hGems').classList.toggle('open',lv.open);
+  $('#hStage').textContent=curRun.mode==='daily'?'TAG':curRun.special?'★'+curRun.n:'W'+curRun.n;$('#hGems span').textContent=lv.got+'/'+lv.need;$('#hGems').classList.toggle('open',lv.open);
   $('#hTime').textContent=t;$('#hTime').classList.toggle('low',t<=15);
   let ef='';if(p.shieldT>0)ef+=`<span style="color:#5ee7ff">SCHILD ${Math.ceil(p.shieldT)}</span>`;
   if(lv.freezeT>0)ef+=`<span style="color:#b9a6ff">STOPP ${Math.ceil(lv.freezeT)}</span>`;
   if(p.magnetT>0)ef+=`<span style="color:#ff5d73">MAGNET ${Math.ceil(p.magnetT)}</span>`;
   if(p.drillT>0)ef+=`<span style="color:#ffcc33">BOHRER ${Math.ceil(p.drillT)}</span>`;
   if(p.helm>0)ef+=`<span style="color:#a39579">HELM ×${p.helm}</span>`;
+  if(uw)ef+=`<span style="color:${p.air<2.5?'#ff5d73':'#5ea8ff'}">LUFT ${Math.ceil(p.air)}</span>`;
+  if(lv.mw===1)ef+=`<span style="color:#c07bff">ZAUBER ${Math.ceil(lv.mwT)}</span>`;
   $('#effects').innerHTML=ef}
 function updPUBar(){const el=$('#pus');if(!el.children.length){el.innerHTML=PU_IDS.map(id=>`<button class="pu" data-pu="${id}" aria-label="${PU[id].name}"><img src="${SPR.puIcon[id]}" alt=""><span class="lv"></span><span class="n"></span></button>`).join('');
     el.querySelectorAll('.pu').forEach(b=>b.addEventListener('pointerdown',e=>{e.preventDefault();usePU(b.dataset.pu)}))}
@@ -775,69 +1038,143 @@ const ov=$('#ov');
 function toast(msg,big){const t=document.createElement('div');t.className='toast'+(big?' big':'');t.textContent=msg;$('#toasts').appendChild(t);
   setTimeout(()=>t.remove(),big?2600:1800);while($('#toasts').children.length>3)$('#toasts').firstChild.remove()}
 function banner(html,ms=1900){const b=$('#banner');b.innerHTML=html;b.hidden=false;clearTimeout(banner.t);banner.t=setTimeout(()=>b.hidden=true,ms)}
-function setPlayUI(on){if(!on)$('#skipBtn').hidden=true;$('#hud').hidden=!on;$('#ctl').hidden=!on;$('#effects').hidden=!on;ov.hidden=on}
+function setPlayUI(on){if(!on){$('#skipBtn').hidden=true;$('#hint').hidden=true}$('#hud').hidden=!on;$('#ctl').hidden=!on;$('#effects').hidden=!on;ov.hidden=on}
 function applyOpts(){const o=save.opts;$('#scan').hidden=!o.scan;const c=$('#ctl');c.classList.toggle('left',o.side==='left');c.classList.toggle('right',o.side!=='left');
   base.classList.toggle('fixed',o.ctrl==='dpad');resize()}
-function startStage(n,fresh){
+// Ghost replay: the best run of each level as a string of moves, kept on this device only
+const GHOST_KEY='boulderRush.ghosts';
+function loadGhosts(){try{return JSON.parse(localStorage.getItem(GHOST_KEY)||'{}')||{}}catch(e){return{}}}
+function storeGhost(key){const rec=ghostRec,w=lv.w;let s='';
+  for(let k=1;k<rec.length;k++){const d=rec[k]-rec[k-1];s+=d===-w?'1':d===1?'2':d===w?'3':d===-1?'4':'0'}
+  const all=loadGhosts();delete all[key];all[key]={s0:rec[0],w,s};const ks=Object.keys(all);while(ks.length>40)delete all[ks.shift()];
+  try{localStorage.setItem(GHOST_KEY,JSON.stringify(all))}catch(e){}}
+function getGhost(key,w){const g=loadGhosts()[key];if(!g||g.w!==w||typeof g.s!=='string')return null;
+  const out=[g.s0],DD=[0,-w,1,w,-1];let i=g.s0;for(const c of g.s){i+=DD[+c]||0;out.push(i)}return out}
+// Tutorial hints: each one shows once
+let hintTimer=0;
+function hint(id){const el=$('#hint');if(!save.opts.tips||save.hints[id]||!el.hidden||state!=='play')return;save.hints[id]=1;persist();
+  el.innerHTML=`<b>TIPP</b>${HINTS[id]}`;el.hidden=false;clearTimeout(hintTimer);hintTimer=setTimeout(()=>el.hidden=true,5500)}
+function checkHints(){if(!save.opts.tips)return;const L=lv,w=L.w,i=L.pI,t=L.t,px=i%w,py=(i/w)|0;
+  if(t[i-w]===R||t[i-w]===G)hint('rock');
+  if(t[i+1]===R&&t[i+2]===E||t[i-1]===R&&t[i-2]===E)hint('push');
+  for(let y=Math.max(1,py-5);y<=Math.min(L.h-2,py+5);y++)for(let x=Math.max(1,px-6);x<=Math.min(w-2,px+6);x++){const tt=t[y*w+x];
+    if(tt===F)hint('enemy');else if(tt===B)hint('butter');else if(tt===AM)hint('amoeba');else if(tt===MW)hint('magic');else if(tt===CH)hint('chest')}}
+function startHints(){setTimeout(()=>{if(state==='play')hint(curRun.n<=1&&curRun.mode==='world'?'move':'grab')},1200)}
+function stageLabel(run){return run.mode==='daily'?'Tagesherausforderung':run.special==='boss'?`Bosswelt ${run.n}`:run.special==='bonus'?`Bonuswelt ${run.n}`:`Welt ${run.n}`}
+function yesterdayKey(){const d=new Date();d.setDate(d.getDate()-1);return dateKey(d)}
+function startStage(n,fresh,mode='world'){
   if(fresh){runTaken=new Set();attempts=0}
-  attempts++;curStage=n;buildTheme(n);lv=genLevel(n);
-  p={dead:false,face:1,hface:1,push:0,lastMove:-9,shieldT:0,magnetT:0,drillT:0,helm:sk('helm'),chance:sk('second')};
-  if(fresh&&sk('kit')&&!save.stars[n]){const id=PU_IDS[Math.floor(Math.random()*5)],s=save.pu[id];if(s.c<maxCharges(s.l)){s.c++;persist();toast(`Startpaket: ${PU[id].name} +1`)}}
-  inp.q=[];inp.held=-1;acc=0;parts=[];floats=[];camSnap=true;hudCache='';
-  setPlayUI(true);updPUBar();applyOpts();
-  if(fresh&&save.opts.preview){state='intro';buildIntro()}else state='play';
+  attempts++;curRun=makeRun(mode,n);const run=curRun;n=run.n;buildTheme(run.theme);lv=genLevel(run);
+  p={dead:false,face:1,hface:1,push:0,lastMove:-9,shieldT:0,magnetT:0,drillT:0,air:6,usedPU:false,helm:sk('helm'),chance:sk('second')};
+  if(fresh&&sk('kit')&&mode==='world'&&!save.stars[n]){const id=PU_IDS[Math.floor(Math.random()*5)],s=save.pu[id];if(s.c<maxCharges(s.l)){s.c++;persist();toast(`Startpaket: ${PU[id].name} +1`)}}
+  inp.q=[];inp.held=-1;acc=0;parts=[];floats=[];camSnap=true;hudCache='';snaps=[];ghostRec=[lv.pI];
+  ghost=save.opts.ghost?getGhost(run.key,lv.w):null;
+  setPlayUI(true);updPUBar();applyOpts();$('#mapBtn').classList.toggle('on',save.opts.map);
+  if(fresh&&save.opts.preview){state='intro';buildIntro()}else{state='play';startHints()}
   $('#ctl').classList.toggle('intro',state==='intro');$('#skipBtn').hidden=state!=='intro';$('#banner').classList.toggle('top',state==='intro');
-  musicPlay('t'+Math.floor((n-1)/5)%THEMES.length);
-  banner(`WELT ${n}<small>${TH.name} · sammle ${lv.need} Diamanten</small>`,state==='intro'?3600:1900);
+  musicPlay(run.special==='boss'?'t3':run.special==='bonus'?'t2':'t'+run.theme);
+  const title=run.mode==='daily'?'TAGESHERAUSFORDERUNG':run.special==='boss'?`BOSSWELT ${n}: LAWINE`:run.special==='bonus'?`BONUSWELT ${n}`:`WELT ${n}`;
+  const sub=run.special==='boss'?`Das Wasser steigt! Klettere nach oben · ${lv.need} Diamanten`:run.special==='bonus'?`Diamantenregen! Zählen doppelt fürs Konto`:`${TH.name} · sammle ${lv.need} Diamanten`;
+  banner(`${title}<small>${sub}</small>`,state==='intro'?3600:1900);
   try{navigator.wakeLock&&navigator.wakeLock.request('screen').catch(()=>{})}catch(e){}}
-function restartStage(){startStage(curStage,false)}
+function restartStage(){startStage(curRun.n,false,curRun.mode)}
 function pauseGame(){state='pause';setDir(-1);applyVol();ov.className='dim';ov.innerHTML=`<div class="wrap" style="margin:auto 0">
-  <h2>PAUSE</h2><div class="card help">Welt ${curStage} · ${lv.got}/${lv.need} Diamanten · ${Math.ceil(lv.timeLeft)} s übrig</div>
+  <h2>PAUSE</h2><div class="card help">${stageLabel(curRun)} · ${lv.got}/${lv.need} Diamanten · ${Math.ceil(lv.timeLeft)} s übrig</div>
   <button class="b main" data-act="resume">WEITER</button><div class="row"><button class="b" data-act="restart">NEUSTART</button><button class="b" data-act="menu">MENÜ</button></div></div>`;ov.hidden=false}
 function resumeGame(){state='play';ov.hidden=true;acc=0;applyVol()}
-function addXP(n){let ups=0;save.xp+=Math.round(n*(1+.15*sk('hunter')));
+function addXP(n,flat){let ups=0;save.xp+=flat?n:Math.round(n*xpMul());
   while(save.xp>=needXP(save.lvl)){save.xp-=needXP(save.lvl);save.lvl++;save.sp++;ups++}return ups}
-function stageClear(){state='clear';sfx.win();buzz([30,40,30]);const n=curStage,replay=!!save.stars[n];
-  const timeB=Math.floor(lv.timeLeft/2),base=30+n*8;let raw=lv.pendXP+base+timeB;if(replay)raw=Math.round(raw*.6);
-  const before=Math.round(raw*(1+.15*sk('hunter')));
-  const stars=1+(lv.got>=Math.ceil(lv.need*1.25)?1:0)+(attempts===1?1:0);
-  save.stars[n]=Math.max(save.stars[n]||0,stars);save.unlocked=Math.max(save.unlocked,n+1);save.stats.clears++;
+function stageClear(){state='clear';sfx.win();buzz([30,40,30]);$('#hint').hidden=true;
+  const run=curRun,n=run.n,daily=run.mode==='daily',today=dateKey();
+  const replay=daily?save.daily.last===today:!!save.stars[n];
+  const timeB=Math.floor(lv.timeLeft/2),base=30+n*8+(run.special==='boss'?80:run.special==='bonus'?30:0);
+  const mult=daily&&!replay?1.5:replay?.6:1;const raw=Math.round((lv.pendXP+base+timeB)*mult),shown=Math.round(raw*xpMul());
+  let stars=0;
+  if(!daily){stars=1+(lv.got>=Math.ceil(lv.need*1.25)?1:0)+(attempts===1?1:0);save.stars[n]=Math.max(save.stars[n]||0,stars);save.unlocked=Math.max(save.unlocked,n+1)}
+  else if(!replay){save.daily.streak=save.daily.last===yesterdayKey()?save.daily.streak+1:1;save.daily.last=today;save.daily.max=Math.max(save.daily.max,save.daily.streak);save.stats.daily++}
+  if(run.special==='boss')save.stats.boss++;else if(run.special==='bonus')save.stats.bonus++;
+  if(!p.usedPU&&n>=5)save.stats.nopu++;
+  save.stats.clears++;
+  const bankAdd=lv.got*(run.special==='bonus'?2:1)+(daily&&!replay?20:0);save.bank+=bankAdd;
+  const tks=ghostRec.length-1,prev=save.best[run.key],pb=!prev||tks<prev;
+  if(pb){save.best[run.key]=tks;storeGhost(run.key);if(prev)save.stats.pb++}
   const ups=addXP(raw);persist();if(ups)setTimeout(sfx.lvl,700);
+  const gi=`<img class="gi" src="${SPR.gemIcon}" alt="">`;
   const myLv=lv;setTimeout(()=>{if(state!=='clear'||lv!==myLv)return;setPlayUI(false);ov.className='';ov.innerHTML=`<div class="wrap">
-    <h2>WELT ${n} GESCHAFFT!</h2>
-    <div class="stars">${[1,2,3].map(k=>k<=stars?'★':'<span class="no">★</span>').join('')}</div>
+    <h2>${stageLabel(run).toUpperCase()} GESCHAFFT!</h2>
+    ${daily?`<div class="card" style="text-align:center"><div class="lvl" style="justify-content:center;color:var(--gem)">SERIE: ${save.daily.streak} TAG${save.daily.streak===1?'':'E'}</div><div class="help">Morgen gibt es eine neue Herausforderung.</div></div>`
+      :`<div class="stars">${[1,2,3].map(k=>k<=stars?'★':'<span class="no">★</span>').join('')}</div>`}
     <div class="card">
+      <div class="stat"><span>Zeit</span><span style="color:${pb&&prev?'var(--green)':'inherit'}">${fmtT(tks)}</span></div>
+      <div class="stat muted"><span>${pb?(prev?'NEUE BESTZEIT!':'Erste Bestzeit'):'Bestzeit'}</span><span>${pb&&prev?'vorher '+fmtT(prev):fmtT(save.best[run.key])}</span></div>
       <div class="stat"><span>Diamanten</span><span>${lv.got}/${lv.need}</span></div>
       <div class="stat"><span>Diamanten &amp; Gegner</span><span>+${lv.pendXP}</span></div>
-      <div class="stat"><span>Weltbonus</span><span>+${base}</span></div>
+      <div class="stat"><span>${run.special?'Spezialbonus':'Weltbonus'}</span><span>+${base}</span></div>
       <div class="stat"><span>Zeitbonus</span><span>+${timeB}</span></div>
-      ${replay?'<div class="stat muted"><span>Wiederholung</span><span>×0,6</span></div>':''}
-      ${sk('hunter')?`<div class="stat muted"><span>Schatzjäger</span><span>+${sk('hunter')*15}%</span></div>`:''}
-      <div class="stat" style="color:var(--gold)"><span>XP gesamt</span><span>+${before}</span></div>
+      ${mult!==1?`<div class="stat muted"><span>${mult>1?'Erster Tagessieg':'Wiederholung'}</span><span>×${String(mult).replace('.',',')}</span></div>`:''}
+      ${xpMul()>1?`<div class="stat muted"><span>Skills &amp; Talisman</span><span>+${Math.round((xpMul()-1)*100)}%</span></div>`:''}
+      <div class="stat" style="color:var(--gold)"><span>XP gesamt</span><span>+${shown}</span></div>
+      <div class="stat" style="color:var(--gem)"><span>Diamanten-Konto</span><span>+${bankAdd} ${gi}</span></div>
     </div>
-    <div class="card help">${stars<3?'Sterne: 1 fürs Schaffen, 1 für 25 % mehr Diamanten als nötig, 1 für keinen Versuch extra.':'Perfekt: alle drei Sterne!'}</div>
+    ${daily?'':`<div class="card help">${stars<3?'Sterne: 1 fürs Schaffen, 1 für 25 % mehr Diamanten als nötig, 1 für keinen Versuch extra.':'Perfekt: alle drei Sterne!'}</div>`}
     ${ups?`<div class="card" style="border-color:var(--gold);text-align:center"><div class="lvl" style="justify-content:center;color:var(--gold)">STUFE ${save.lvl}! +${ups} SKILLPUNKT${ups>1?'E':''}</div></div>`:''}
     ${lvlCard()}
-    <button class="b main" data-act="next">WELT ${n+1} ▶</button>
-    <div class="row"><button class="b" data-act="skills">SKILLS${save.sp?`<span class="badge">${save.sp}</span>`:''}</button><button class="b" data-act="menu">MENÜ</button></div></div>`;ov.hidden=false},900)}
+    ${daily?'<button class="b main" data-act="daily">NOCHMAL, BESTZEIT JAGEN</button>':`<button class="b main" data-act="next">WELT ${n+1} ▶</button>`}
+    <div class="row"><button class="b" data-act="skills">SKILLS${save.sp?`<span class="badge">${save.sp}</span>`:''}</button><button class="b" data-act="menu">MENÜ</button></div></div>`;ov.hidden=false;ov.scrollTop=0},900)}
 function lvlCard(){const need=needXP(save.lvl);return `<div class="card"><div class="lvl"><span>STUFE ${save.lvl}</span><span class="muted">${save.xp}/${need} XP</span></div><div class="bar"><i style="width:${save.xp/need*100}%"></i></div></div>`}
+const gemImg=()=>`<img class="gi" src="${SPR.gemIcon}" alt="">`;
 function showMenu(){state='menu';screen='title';musicPlay('menu');applyVol();setPlayUI(false);ov.className='';const next=Math.min(save.unlocked,999);
+  const today=dateKey(),dDone=save.daily.last===today,dBest=save.best['d'+today],need=needXP(save.lvl);
+  const streak=dDone||save.daily.last===yesterdayKey()?save.daily.streak:0,av=AVATARS.find(a=>a.id===save.avatar)||AVATARS[0];
+  const nAch=ACH.filter(a=>save.ach[a.id]).length,nextSp=next%10===0;
   ov.innerHTML=`<div class="wrap">
     <div class="logo">BOULDER<br>RUSH<small>STOLLEN · STEINE · DIAMANTEN</small></div>
-    ${lvlCard()}
-    <button class="b main" data-act="play" data-n="${next}">▶ WELT ${next} SPIELEN</button>
+    <div class="card me"><img src="${avatarIcon(save.avatar)}" alt="${av.name}"><div>
+      <div class="lvl"><span>STUFE ${save.lvl}</span><span style="color:var(--gem)">${gemImg()} ${save.bank}</span></div>
+      <div class="bar"><i style="width:${save.xp/need*100}%"></i></div>
+      <div class="muted" style="font-size:17px;margin-top:6px">${av.name} · ${save.xp}/${need} XP</div></div></div>
+    <button class="b main" data-act="play" data-n="${next}">▶ ${nextSp?(next%20===10?'BONUSWELT':'BOSSWELT'):'WELT'} ${next} SPIELEN</button>
+    <button class="b daily" data-act="daily">TAGESHERAUSFORDERUNG<small>${dDone?'Heute geschafft ✓':'Heute noch offen'} · Serie ${streak}${dBest?' · Bestzeit '+fmtT(dBest):''}</small></button>
     <div class="row"><button class="b" data-act="worlds">WELTEN</button><button class="b" data-act="skills">SKILLS${save.sp?`<span class="badge">${save.sp}</span>`:''}</button></div>
-    <div class="row"><button class="b" data-act="pus">POWER-UPS</button><button class="b" data-act="opts">OPTIONEN</button></div>
+    <div class="row"><button class="b" data-act="pus">POWER-UPS</button><button class="b" data-act="gear">AUSRÜSTUNG</button></div>
+    <div class="row"><button class="b" data-act="avatars">AVATARE</button><button class="b" data-act="ach">ERFOLGE<small>${nAch}/${ACH.length}</small></button></div>
+    <button class="b" data-act="opts">OPTIONEN</button>
     <div class="card help"><b>Laufen:</b> Daumen auf die ${save.opts.side==='left'?'linke':'rechte'} Bildschirmhälfte legen und in die Richtung ziehen. Kurz in eine Richtung tippen oder wischen = genau ein Feld.<br>
     <b>Greifen</b> halten + Richtung: graben oder einsammeln, ohne loszulaufen.<br>
     <b>Ziel:</b> genug Diamanten sammeln, dann öffnet sich der Ausgang. Fallende Felsen und Glühwürmer sind tödlich, Schmetterlinge werden beim Zerplatzen zu Diamanten.</div>
     <div class="muted" style="text-align:center;font-size:17px">Spielstand: ${cloudOK?'auf dem Gerät und in deinem Claude-Konto':'auf diesem Gerät'} · Version ${BUILD}</div>
   </div>`;ov.hidden=false;ov.scrollTop=0}
 function showWorlds(){screen='worlds';let h='';const top=save.unlocked;
-  for(let n=1;n<=top+1;n++){const th=THEMES[Math.floor((n-1)/5)%THEMES.length],st=save.stars[n]||0,lock=n>top;
-    h+=`<button class="world${lock?' lock':''}" data-act="${lock?'':'play'}" data-n="${n}" style="border-color:${lock?'':th.gem[2]}"><span>${n}</span><span class="st">${lock?'—':'★'.repeat(st)+'·'.repeat(3-st)}</span></button>`}
-  ov.innerHTML=`<div class="wrap"><h2>WELTEN</h2><div class="card help">Jede Welt wird aus ihrer Nummer erzeugt und bleibt bei jedem Besuch gleich. Alle fünf Welten wechselt die Höhle. Wiederholte Welten geben 60 % XP.</div>
+  for(let n=1;n<=top+1;n++){const th=THEMES[Math.floor((n-1)/5)%THEMES.length],st=save.stars[n]||0,lock=n>top,sp=n%10===0;
+    h+=`<button class="world${lock?' lock':''}${sp?' sp':''}" data-act="${lock?'':'play'}" data-n="${n}" style="border-color:${lock?'':th.gem[2]}"><span>${n}</span>${sp?`<small>${n%20===10?'BONUS':'BOSS'}</small>`:''}<span class="st">${lock?'—':'★'.repeat(st)+'·'.repeat(3-st)}</span></button>`}
+  ov.innerHTML=`<div class="wrap"><h2>WELTEN</h2><div class="card help">Jede Welt wird aus ihrer Nummer erzeugt und bleibt bei jedem Besuch gleich. Alle fünf Welten wechselt die Höhle. Jede zehnte Welt ist besonders: abwechselnd eine Bonuswelt voller Diamanten und eine Bosswelt mit steigendem Wasser. Wiederholte Welten geben 60 % XP.</div>
     <div class="grid">${h}</div><button class="b" data-act="menu">ZURÜCK</button></div>`;ov.scrollTop=0}
+function showGear(){screen='gear';const eq=save.gear.eq,bag=save.gear.bag;
+  const item=it=>`<div class="nm" style="color:${RAR[it.r][1]}">${gearName(it)}</div><div class="help">${RAR[it.r][0]} · ${GEAR[it.s].d(GEAR[it.s].vals[it.r])}</div>`;
+  ov.innerHTML=`<div class="wrap"><h2>AUSRÜSTUNG</h2>
+    <div class="card help">Truhen stehen in Spezialwelten, in der Tagesherausforderung und manchmal in neuen Welten ab Welt 3. Ein besseres Teil legst du sofort an. Überzählige Teile kannst du verschrotten, dann bekommst du Diamanten fürs Konto.</div>
+    <div class="card"><div class="lvl"><span>ANGELEGT</span><span style="color:var(--gem)">${gemImg()} ${save.bank}</span></div>
+    ${GEAR_IDS.map(id=>`<div class="gear"><div><div class="slot">${GEAR[id].name.toUpperCase()}</div>${eq[id]?item(eq[id]):'<div class="help">Noch nichts gefunden.</div>'}</div></div>`).join('')}</div>
+    <div class="card"><div class="lvl"><span>TASCHE ${bag.length}/16</span></div>
+    ${bag.length?bag.map((it,i)=>`<div class="gear"><div><div class="slot">${GEAR[it.s].name.toUpperCase()}</div>${item(it)}</div><div class="row"><button class="b small" data-act="equip" data-i="${i}">ANLEGEN</button><button class="b small" data-act="scrap" data-i="${i}">+${SCRAP[it.r]} ${gemImg()}</button></div></div>`).join(''):'<div class="help">Leer.</div>'}</div>
+    <button class="b" data-act="back">ZURÜCK</button></div>`}
+function showAvatars(){screen='avatars';
+  ov.innerHTML=`<div class="wrap"><h2>AVATARE</h2>
+    <div class="card help">Helden aus Spielen und Filmen der 80er, 90er und frühen 2000er als Pixel-Hommage. Du kaufst sie mit dem Diamanten-Konto: Jeder Diamant, den du in einer geschafften Welt sammelst, landet dort.</div>
+    <div class="lvl" style="justify-content:center;color:var(--gem)"><span>${gemImg()} ${save.bank} DIAMANTEN</span></div>
+    <div class="avs">${AVATARS.map(a=>{const own=save.owned.includes(a.id),sel=save.avatar===a.id;
+      const st=sel?'GEWÄHLT':own?'WÄHLEN':a.ach?'ERFOLG: '+ACH.find(x=>x.id===a.ach).name.toUpperCase():`${a.cost} ${gemImg()}`;
+      return `<button class="av${sel?' sel':''}${own?'':' lock'}" data-act="avatar" data-id="${a.id}"><img src="${avatarIcon(a.id)}" alt=""><span>${a.name}</span><small>${a.from}</small><span>${st}</span></button>`}).join('')}</div>
+    <button class="b" data-act="back">ZURÜCK</button></div>`}
+function showAch(){screen='ach';const st=save.stats,done=ACH.filter(a=>save.ach[a.id]).length;
+  const row=(k,v)=>`<div class="stat"><span>${k}</span><span>${v}</span></div>`;
+  ov.innerHTML=`<div class="wrap"><h2>ERFOLGE ${done}/${ACH.length}</h2>
+    <div class="card">${ACH.map(a=>{const ok=!!save.ach[a.id];return `<div class="ach${ok?' done':''}"><span class="ic">★</span><div><div class="nm">${a.name}</div><div class="help">${a.d}</div></div><div class="rw">${a.xp?`+${a.xp} XP`:''}${a.xp&&a.gems?'<br>':''}${a.gems?`+${a.gems} ${gemImg()}`:''}</div></div>`}).join('')}</div>
+    <h2>STATISTIK</h2><div class="card">
+      ${row('Stufe',save.lvl)}${row('Welten geschafft',st.clears)}${row('Höchste Welt',save.unlocked-1)}${row('Diamanten gesammelt',st.gems)}${row('Gegner besiegt',st.kills)}
+      ${row('Unfälle',st.deaths)}${row('Truhen geöffnet',st.chests)}${row('Bonuswelten',st.bonus)}${row('Bosswelten',st.boss)}
+      ${row('Tagesherausforderungen',st.daily)}${row('Längste Serie',save.daily.max)}${row('Zeitsprünge',st.rewinds)}${row('Eigene Geister geschlagen',st.pb)}</div>
+    <button class="b" data-act="back">ZURÜCK</button></div>`}
 let selSkill=null;
 function canLearn(s){const r=sk(s.id);return save.sp>0&&r<s.max&&(!s.req||sk(s.req)>0)}
 function showSkills(){screen='skills';if(!selSkill)selSkill=SKILLS[0].id;
@@ -858,7 +1195,7 @@ function showPUs(){screen='pus';
     <div><div class="nm" style="color:${PU[id].col}">${PU[id].name} · ST. ${s.l}</div><div class="help"><b>${PU[id].eff(s.l)}</b>${s.l<5?`<br>Stufe ${s.l+1}: ${PU[id].eff(s.l+1)}`:''}</div>
     <div class="row" style="justify-content:space-between;font-size:17px;margin-top:4px"><span>Ladungen ${s.c}/${maxCharges(s.l)}</span><span class="muted">${s.l<5?`Fragmente ${s.f}/${need}`:'Max. Stufe'}</span></div>
     <div class="bar gem"><i style="width:${s.l<5?s.f/need*100:100}%"></i></div></div></div>`}).join('')}
-  <div class="card help">Im Spiel: Symbol rechts antippen oder Tasten 1–5. Dynamit zündet in Blickrichtung.</div>
+  <div class="card help">Im Spiel: Symbol rechts antippen oder Tasten 1–6. Dynamit zündet in Blickrichtung.</div>
   <button class="b" data-act="back">ZURÜCK</button></div>`;ov.scrollTop=0}
 let resetArm=false;
 function showOpts(){screen='opts';const o=save.opts;
@@ -872,8 +1209,11 @@ function showOpts(){screen='opts';const o=save.opts;
     <div class="opt"><span>Musik</span>${seg('mus',[[0,'Aus'],[1,'Leise'],[2,'Laut']])}</div>
     <div class="opt"><span>Levelvorschau</span>${seg('preview',[[true,'An'],[false,'Aus']])}</div>
     <div class="opt"><span>Vibration</span>${seg('haptic',[[true,'An'],[false,'Aus']])}</div>
-    <div class="opt"><span>Röhrenbild</span>${seg('scan',[[true,'An'],[false,'Aus']])}</div></div>
-    <div class="card help">„Stick frei“: wo dein Daumen landet, ist die Mitte. „Kreuz fest“: das Steuerkreuz steht immer an derselben Stelle. „Kurz tippen = 1 Feld“ wartet nach dem ersten Schritt kurz, bevor du weiterläufst.</div>
+    <div class="opt"><span>Röhrenbild</span>${seg('scan',[[true,'An'],[false,'Aus']])}</div>
+    <div class="opt"><span>Tipps</span>${seg('tips',[[true,'An'],[false,'Aus']])}</div>
+    <div class="opt"><span>Geist (Bestzeit)</span>${seg('ghost',[[true,'An'],[false,'Aus']])}</div>
+    <div class="opt"><span>Minikarte</span>${seg('map',[[true,'An'],[false,'Aus']])}</div></div>
+    <div class="card help">„Stick frei“: wo dein Daumen landet, ist die Mitte. „Kreuz fest“: das Steuerkreuz steht immer an derselben Stelle. „Kurz tippen = 1 Feld“ wartet nach dem ersten Schritt kurz, bevor du weiterläufst. Der Geist läuft deine bisher schnellste Runde nach. Tipps wieder einschalten zeigt alle Tipps erneut.</div>
     <div class="card help">Gespeichert wird ${cloudOK?'auf diesem Gerät und in deinem Claude-Konto, also auch auf anderen Geräten verfügbar':'auf diesem Gerät'}.<br>
     Stufe ${save.lvl} · ${save.stats.clears} Welten geschafft · ${save.stats.gems} Diamanten · ${save.stats.kills} Gegner · ${save.stats.deaths} Unfälle</div>
     <button class="b" data-act="reset" style="border-color:var(--red);color:var(--red)">${resetArm?'WIRKLICH ALLES LÖSCHEN?':'SPIELSTAND ZURÜCKSETZEN'}</button>
@@ -882,7 +1222,20 @@ ov.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.
   if(act!=='reset')resetArm=false;
   switch(act){
     case 'play':{const n=+b.dataset.n;try{const de=document.documentElement;if(!document.fullscreenElement&&de.requestFullscreen&&matchMedia('(pointer:coarse)').matches)de.requestFullscreen().catch(()=>{})}catch(_){}startStage(n,true);break}
-    case 'next':startStage(curStage+1,true);break;
+    case 'next':startStage(curRun.n+1,true);break;
+    case 'daily':startStage(0,true,'daily');break;
+    case 'gear':showGear();ov.scrollTop=0;break;
+    case 'avatars':showAvatars();ov.scrollTop=0;break;
+    case 'ach':showAch();ov.scrollTop=0;break;
+    case 'equip':{const bag=save.gear.bag,it=bag[+b.dataset.i];if(!it)break;const cur=save.gear.eq[it.s];bag.splice(+b.dataset.i,1);if(cur)bag.push(cur);
+      save.gear.eq[it.s]=it;persist();const sc=ov.scrollTop;showGear();ov.scrollTop=sc;break}
+    case 'scrap':{const bag=save.gear.bag,it=bag[+b.dataset.i];if(!it)break;bag.splice(+b.dataset.i,1);save.bank+=SCRAP[it.r];sfx.gem();persist();const sc=ov.scrollTop;showGear();ov.scrollTop=sc;break}
+    case 'avatar':{const a=AVATARS.find(x=>x.id===b.dataset.id),sc=ov.scrollTop;if(!a)break;
+      if(save.owned.includes(a.id)){setAvatar(a.id);persist()}
+      else if(a.ach){sfx.err();toast(`Freischalten mit dem Erfolg „${ACH.find(x=>x.id===a.ach).name}“`)}
+      else if(save.bank>=a.cost){save.bank-=a.cost;save.owned.push(a.id);setAvatar(a.id);persist();sfx.lvl();toast(`${a.name} gehört jetzt dir!`,true)}
+      else{sfx.err();toast(`Dir fehlen noch ${a.cost-save.bank} Diamanten`)}
+      showAvatars();ov.scrollTop=sc;break}
     case 'worlds':showWorlds();break;
     case 'skills':showSkills();ov.scrollTop=0;break;
     case 'pus':showPUs();break;
@@ -890,10 +1243,10 @@ ov.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.
     case 'menu':lv=null;showMenu();break;
     case 'back':showMenu();break;
     case 'resume':resumeGame();break;
-    case 'restart':ov.hidden=true;startStage(curStage,false);break;
+    case 'restart':ov.hidden=true;restartStage();break;
     case 'sel':selSkill=b.dataset.id;showSkills();break;
     case 'learn':{const s=SKILLS.find(x=>x.id===selSkill);if(canLearn(s)){save.skills[s.id]=sk(s.id)+1;save.sp--;persist();sfx.lvl();showSkills()}break}
-    case 'opt':{const k=b.dataset.k;let v=b.dataset.v;if(v==='true')v=true;else if(v==='false')v=false;else if(/^\d+$/.test(v))v=+v;save.opts[k]=v;persist();applyOpts();applyVol();if(k==='mus'||k==='sfx')ensureAc();showOpts();break}
+    case 'opt':{const k=b.dataset.k;let v=b.dataset.v;if(v==='true')v=true;else if(v==='false')v=false;else if(/^\d+$/.test(v))v=+v;save.opts[k]=v;if(k==='tips'&&v)save.hints={};persist();applyOpts();applyVol();if(k==='mus'||k==='sfx')ensureAc();showOpts();break}
     case 'reset':if(!resetArm){resetArm=true;showOpts()}else{resetArm=false;const o=save.opts;save=defSave();save.opts=o;persist();toast('Spielstand zurückgesetzt');showMenu()}break;
   }});
 
@@ -907,8 +1260,8 @@ if(NativeApp){NativeApp.addListener('backButton',()=>{
   NativeApp.addListener('pause',()=>{if(state==='play')pauseGame()})}
 
 /* ================= boot ================= */
-buildStatic();buildTheme(1);applyOpts();showMenu();requestAnimationFrame(frame);
+buildStatic();buildTheme(0);applyOpts();showMenu();requestAnimationFrame(frame);
 if(document.fonts&&document.fonts.load)document.fonts.load('10px "Press Start 2P"').catch(()=>{});
 setTimeout(initCloud,0);
-window.__br={genLevel,get lv(){return lv},get p(){return p},get state(){return state},get save(){return save},startStage,physics,reach,tick,inp};
+window.__br={genLevel,makeRun,doRewind,get snaps(){return snaps},get ghostRec(){return ghostRec},get curRun(){return curRun},get lv(){return lv},get p(){return p},get state(){return state},get save(){return save},startStage,physics,reach,tick,inp};
 </script>
