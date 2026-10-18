@@ -1,0 +1,20 @@
+{
+  "name": "boulder-rush",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Boulder-Dash-Klon fürs Handy: erzeugte Welten, Touch-Steuerung, Skilltree und Power-ups",
+  "scripts": {
+    "build": "node scripts/build-web.mjs",
+    "sync": "npm run build && npx cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "6.2.1",
+    "@capacitor/app": "^6.0.2",
+    "@capacitor/core": "6.2.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "6.2.1",
+    "@fontsource/press-start-2p": "5.2.5",
+    "@fontsource/vt323": "5.2.5"
+  }
+}

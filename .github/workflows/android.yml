@@ -1,0 +1,58 @@
+name: Android APK
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+
+      - name: Build web game
+        run: |
+          npm ci
+          npm run build
+          npx cap sync android
+
+      - name: Build APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease --no-daemon
+          cp app/build/outputs/apk/release/app-release.apk ../boulder-rush.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: boulder-rush-apk
+          path: boulder-rush.apk
+
+      - name: Publish download (main only)
+        if: github.event_name != 'pull_request'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: apk-latest
+          name: Boulder Rush (neueste Version)
+          prerelease: false
+          make_latest: true
+          body: |
+            Neuester Android-Build von `${{ github.sha }}` (Build ${{ github.run_number }}).
+            Auf dem Handy `boulder-rush.apk` herunterladen und öffnen. Beim ersten Mal fragt Android, ob der Browser Apps installieren darf.
+          files: boulder-rush.apk
