@@ -2,7 +2,7 @@
 
 Ein Boulder-Dash-Klon fürs Handy: automatisch erzeugte Höhlen, präzise Touch-Steuerung, Retro-Pixelgrafik,
 XP-Stufen mit Skillbaum und sammelbare, aufwertbare Power-ups. Dazu Tagesherausforderung, Bonus- und Bosswelten,
-Ausrüstung aus Truhen, 15 Avatare als Hommage an Spiel- und Filmhelden der 80er bis frühen 2000er, Erfolge,
+Ausrüstung aus Truhen, 33 Avatare als Hommage an Spiel-, Film- und Comic-Helden, Halloween-, Weihnachts- und Oster-Design, Erfolge,
 Geist-Replay der eigenen Bestzeit, Minikarte und Zeitsprung.
 
 ## Spielen

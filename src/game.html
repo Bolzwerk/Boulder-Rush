@@ -12,7 +12,17 @@
   --pix:"Press Start 2P", ui-monospace, "Courier New", monospace;
   --txt:"VT323", ui-monospace, "Courier New", monospace;
   color-scheme:dark;
+  --ovA:#2a1d3acc; --ovB:#07060af2; --logo1:#b5521b; --logo2:#3a1608; --logoSub:#0d4a6b; --mainBg:#3a2a0a;
 }
+html[data-season=halloween]{--bg:#0a0610;--panel:#170c1e;--panel2:#24122e;--ink:#f6e6d0;--dim:#a88aa0;--gold:#ff8a1a;--gem:#b77bff;--line:#4a2458;--green:#9cff5a;
+  --ovA:#5a1e0acc;--ovB:#0a061099;--logo1:#6a1a8a;--logo2:#1a0620;--logoSub:#3a0a4a;--mainBg:#3a1606}
+html[data-season=xmas]{--bg:#050a14;--panel:#0d1828;--panel2:#132238;--ink:#f4f8ff;--dim:#9ab0c8;--gold:#ff5a5a;--gem:#6ae07a;--line:#2a4664;
+  --ovA:#1a3a6acc;--ovB:#050a1499;--logo1:#1a7a2a;--logo2:#062010;--logoSub:#0a3a14;--mainBg:#3a0c10}
+html[data-season=easter]{--bg:#0b1410;--panel:#13241c;--panel2:#1c3328;--ink:#fff8ec;--dim:#a8c0a8;--gold:#ffe066;--gem:#ff9ad8;--line:#3a6448;--green:#8aff8a;
+  --ovA:#4a6a3acc;--ovB:#0b141099;--logo1:#d04a9a;--logo2:#3a1030;--logoSub:#6a2a5a;--mainBg:#34320e}
+.season{display:grid;grid-template-columns:48px minmax(0,1fr);gap:12px;align-items:center;border-color:var(--gold)}
+.season img{width:48px;height:48px;image-rendering:pixelated}
+.season .nm{font-family:var(--pix);font-size:12px;color:var(--gold);margin-bottom:4px}
 [hidden]{display:none!important}
 html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);overflow:hidden;
   touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overscroll-behavior:none;
@@ -69,12 +79,12 @@ button{font:inherit;color:inherit}
 /* Overlays */
 #ov{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;overflow-y:auto;touch-action:pan-y;
   padding:calc(env(safe-area-inset-top,0px) + 18px) max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 24px) max(16px,env(safe-area-inset-left,0px));
-  background:radial-gradient(ellipse at 50% 0%,#2a1d3acc,#07060af2 70%);box-sizing:border-box}
+  background:radial-gradient(ellipse at 50% 0%,var(--ovA),var(--ovB) 70%);box-sizing:border-box}
 #ov.dim{background:#07060ad0}
 .wrap{width:100%;max-width:520px;display:flex;flex-direction:column;gap:14px}
 .logo{font-family:var(--pix);font-size:clamp(26px,9vw,44px);line-height:1.15;text-align:center;color:var(--gold);
-  text-shadow:3px 3px 0 #b5521b,6px 6px 0 #3a1608;letter-spacing:2px;margin:18px 0 4px}
-.logo small{display:block;font-size:.32em;color:var(--gem);text-shadow:2px 2px 0 #0d4a6b;letter-spacing:4px;margin-top:10px}
+  text-shadow:3px 3px 0 var(--logo1),6px 6px 0 var(--logo2);letter-spacing:2px;margin:18px 0 4px}
+.logo small{display:block;font-size:.32em;color:var(--gem);text-shadow:2px 2px 0 var(--logoSub);letter-spacing:4px;margin-top:10px}
 h2{font-family:var(--pix);font-size:15px;color:var(--gold);margin:6px 0 0;text-align:center;line-height:1.4}
 .card{background:var(--panel);border:3px solid var(--line);padding:12px 14px;box-shadow:4px 4px 0 #000}
 .row{display:flex;gap:10px;align-items:center}
@@ -82,7 +92,7 @@ h2{font-family:var(--pix);font-size:15px;color:var(--gold);margin:6px 0 0;text-a
 .b{font-family:var(--pix);font-size:12px;line-height:1.4;padding:14px 12px;background:var(--panel2);border:3px solid var(--line);box-shadow:4px 4px 0 #000;cursor:pointer;text-align:center;flex:1;min-width:0}
 .b:active{transform:translate(2px,2px);box-shadow:2px 2px 0 #000}
 .b:focus-visible,.pu:focus-visible,#grab:focus-visible{outline:3px solid var(--gem);outline-offset:2px}
-.b.main{background:#3a2a0a;border-color:var(--gold);color:var(--gold);font-size:15px;padding:18px 12px}
+.b.main{background:var(--mainBg);border-color:var(--gold);color:var(--gold);font-size:15px;padding:18px 12px}
 .b.small{font-size:10px;padding:10px 8px;flex:0 0 auto}
 .b[disabled]{opacity:.4}
 .badge{display:inline-block;background:var(--red);color:#fff;font-size:9px;padding:3px 5px;margin-left:6px;vertical-align:middle}
@@ -291,6 +301,61 @@ const AVATARS=[
   {id:'chief',name:'Supersoldat',from:'Shooter, 2001',cost:250,pal:{g:'#4a7a3a',G:'#2a5a2a',v:'#f0a020',V:'#ffd060',a:'#3a3a3a',P:'#4a7a3a',W:'#2a3a2a'},
    head:["................",".....kkkkkk.....","....kggggggk....","...kggggggggk...","...kgVvvvvvgk...","...kgvvvvvvgk...","...kGgvvvvgGk...","...kGggggggGk...","....kGGGGGGk...."],
    torso:["..kggggggggggk..","..kgGkggggkGgk..","...kgaaaaaagk...","....kGGGGGGk...."]},
+  {id:'duke',name:'Actionheld',from:'Shooter, 1996',cost:180,pal:{h:'#f0d040',s:'#e8a878',g:'#101010',G:'#6a6a7a',r:'#d02020',j:'#3a5a9a',P:'#3a5a9a',W:'#2a2a2a'},
+   head:["................","....kkkkkkkk....","....khhhhhhk....","....khhhhhhk....","...kssssssssk...","...kssssssssk...","...ksgGggGgsk...","...kssssssssk...","....ksskkssk...."],
+   torso:["..kssrrrrrrssk..","..kssrrrrrrssk..","..kssjjjjjjssk..","....kjjjjjjk...."]},
+  {id:'jazz',name:'Turbohase',from:'Jump-and-Run, 1994',cost:140,blink:'g',pal:{g:'#3ab83a',l:'#c8f0a0',r:'#e02020',e:'#1a1a1a',a:'#8a8a9a',P:'#3ab83a',W:'#e02020'},
+   head:["....kk....kk....","...kgk....kgk...","...kgk....kgk...","...kgkkkkkkgk...","...kggggggggk...","...krrrrrrrrk...","...kggeggeggk...","....kgllllgk....",".....kggggk....."],
+   torso:["....kggggggk....","..kaaggllgggk...","...kgglllggk....","....kggggggk...."]},
+  {id:'leeloo',name:'Das fünfte Element',from:'Film, 1997',cost:220,pal:{o:'#ff7a1a',O:'#d05a10',s:'#f2c8a8',e:'#2a6ad8',w:'#f0f0f0',b:'#c8a080',P:'#f0f0f0',W:'#c86a2a'},
+   head:["................",".....kkkkkk.....","....kooooook....","...kooooooook...","...kooooooook...","...kossssssok...","...kosessesok...","...kOssssssOk...","....kOssssOk...."],
+   torso:["....kwwbbwwk....","...ksbwwwwbsk...","...kswbwwbwsk...","....kwwwwwwk...."]},
+  {id:'korben',name:'Taxifahrer',from:'Film, 1997',cost:180,pal:{h:'#e8d070',s:'#e8a878',o:'#ff8a20',O:'#c86010',j:'#4a4a5a',P:'#4a4a5a',W:'#2a2a2a'},
+   head:["................","................",".....kkkkkk.....","....khhhhhhk....","...khhhhhhhhk...","...kssssssssk...","...kssessessk...","....kssssssk....",".....kssssk....."],
+   torso:["...ksoooooosk...","...ksoOooOosk...","...ksoooooosk...","....kjjjjjjk...."]},
+  {id:'trinity',name:'Die Hackerin',from:'Film, 1999',cost:220,pal:{k:'#050505',h:'#141414',s:'#f0d0b8',g:'#0c0c0c',G:'#4a7a4a',c:'#18181e',C:'#3a3a48',P:'#18181e',W:'#050505'},
+   head:["................",".....kkkkkk.....","....khhhhhhk....","...khhhhhhhhk...","...khsssssshk...","...khsssssshk...","...khgGssgGhk...","....kssssssk....",".....kssssk....."],
+   torso:["....kcccccck....","...kcCccccCck...","...ksccccccsk...","....kcccccck...."]},
+  {id:'tim',name:'Reporter',from:'Comic, Belgien 1929',cost:120,pal:{o:'#e88a2a',s:'#f6c8a0',w:'#ffffff',b:'#3a6ad8',B:'#2a4aa8',P:'#c8a070',W:'#6b3f1d'},
+   head:["......kk........",".....kook.......","....kooookk.....","...kooooooook...","...kossssssok...","....kssssssk....","....ksessesk....","....kssssssk....",".....kssssk....."],
+   torso:["....kbwwwwbk....","...kbbbbbbbbk...","...ksbbbbbbsk...","....kBBBBBBk...."]},
+  {id:'gallier',name:'Gallier',from:'Comic, Frankreich 1959',cost:150,pal:{a:'#c8c8d8',w:'#ffffff',y:'#f0d040',s:'#f6c8a0',b:'#2a2a2a',B:'#8a5a2a',r:'#d02020',P:'#d02020',W:'#6b3f1d'},
+   head:["................",".ww..kkkkkk..ww.","..ww.kaaaak.ww..","...wkaaaaaakw...","....kaaaaaak....","...kyssssssyk...","...kysessesyk...","..kyyyyyyyyyyk..","...ky.kssk.yk..."],
+   torso:["....kbbbbbbk....","...kbbbbbbbbk...","...ksBBBBBBsk...","....krrrrrrk...."]},
+  {id:'obelix',name:'Hinkelsteinträger',from:'Comic, Frankreich 1959',cost:150,pal:{r:'#d04020',s:'#f6c8a0',n:'#f0a090',g:'#3a8a3a',l:'#3a6ad8',w:'#ffffff',W:'#6b3f1d'},
+   head:["................","................",".....kkkkkk.....","...kkrrrrrrkk...","..krrssssssrrk..","..krssessessrk..","..krkssnnsskrk..","..kr.kssssk.rk..","..kk..kssk..kk.."],
+   torso:["..kssssssssssk..","..kssssssssssk..","..kggggggggggk..","..klwlwlwlwlwk.."],
+   legs:["...klwlwlwlwlk..","....klwlkklwlk..","....kWWWkkWWWk.."]},
+  {id:'cowboy',name:'Einsamer Cowboy',from:'Comic, Belgien 1946',cost:130,pal:{x:'#f0f0e0',X:'#c8c8b8',h:'#1a1a1a',s:'#f6c8a0',r:'#d02020',y:'#f0d040',v:'#1a1a1a',b:'#6b3f1d',P:'#3a5a9a',W:'#6b3f1d'},
+   head:["................",".....kkkkkk.....","....kxxxxxxk....","....kXXXXXXk....","..kkkkkkkkkkkk..","....khsssshk....","....ksessesk....","....kssssssk....",".....krrrrk....."],
+   torso:["....kvyrryvk....","...kvvyyyyvvk...","...ksvyyyyvsk...","....kbbbbbbk...."]},
+  {id:'page',name:'Hotelpage',from:'Comic, Belgien 1938',cost:110,pal:{r:'#d02020',R:'#a01010',y:'#ffd23d',o:'#e07020',s:'#f6c8a0',P:'#d02020',W:'#1a1a1a'},
+   head:["................","......kkkk......",".....krrrrk.....",".....kyyyyk.....","....kooooook....","...kosssssook...","....ksessesk....","....kssssssk....",".....kssssk....."],
+   torso:["....krryyrrk....","...krryrryrrk...","...ksryrryrsk...","....kRRRRRRk...."]},
+  {id:'wicht',name:'Blauer Wicht',from:'Comic, Belgien 1958',cost:90,pal:{x:'#f8f8f8',s:'#4aa0f0',w:'#ffffff',P:'#f0f0f0',W:'#e0e0e0'},
+   head:["................","......kkkkk.....",".....kxxxxxk....","....kxxxxxxxk...","...kxxxxxxxxk...","...kssssssssk...","...kswessewsk...","....kssssssk....",".....kssssk....."],
+   torso:["....kssssssk....","...kssssssssk...","...kxxxxxxxxk...","....kxxxxxxk...."]},
+  {id:'netz',name:'Netzschwinger',from:'Comic, USA 1962',cost:200,pal:{r:'#d82020',w:'#ffffff',b:'#2040b0',P:'#2040b0',W:'#d82020'},
+   head:["................",".....kkkkkk.....","....krrrkrrk....","...krrkrrkrrk...","...krkrrrrkrk...","...kwwrrrrwwk...","...kwwkrrkwwk...","....krrkkrrk....",".....krrrrk....."],
+   torso:["....krrkkrrk....","...kbrrkkrrbk...","...krbrrrrbrk...","....kbbbbbbk...."]},
+  {id:'fleder',name:'Fledermausritter',from:'Comic, USA 1939',cost:240,pal:{c:'#1a1a2a',g:'#7a7a8a',s:'#f0c8a0',w:'#ffffff',y:'#ffd23d',P:'#7a7a8a',W:'#1a1a2a'},
+   head:["...k........k...","...kk......kk...","...kck....kck...","...kcckkkkcck...","...kcccccccck...","...kcwwccwwck...","...kcccccccck...","....kssssssk....",".....kssssk....."],
+   torso:["..kcggggggggck..","..kcggggggggck..","..kcsyyyyyysck..","..kccggggggcck.."]},
+  {id:'stahl',name:'Der Stählerne',from:'Comic, USA 1938',cost:260,pal:{h:'#141428',s:'#f6c8a0',b:'#2a5ad8',r:'#d82020',y:'#ffd23d',P:'#2a5ad8',W:'#d82020'},
+   head:["................",".....kkkkkk.....","....khhhhhhk....","...khhhhhhhhk...","...khssssshhk...","....kssssssk....","....ksessesk....","....kssssssk....",".....kssssk....."],
+   torso:["..krbbbbbbbbrk..","..krbbbbbbbbrk..","..krsbbbbbbsrk..","..krryyyyyyrrk.."]},
+  {id:'klaue',name:'Klauenmann',from:'Comic, USA 1974',cost:220,pal:{y:'#f0c020',b:'#2a4ab8',B:'#1a2a80',s:'#f0c8a0',w:'#e0e0f0',P:'#f0c020',W:'#2a4ab8'},
+   head:["..k..........k..","..kk........kk..","..kbk......kbk..","...kbkkkkkkbk...","...kbbbbbbbbk...","...kbwwbbwwbk...","...kbbssssbbk...","....kssssssk....",".....kssssk....."],
+   torso:["....kyyyyyyk....","..wkbyyyyyybkw..","..wksyyyyyyskw..","....kBBBBBBk...."]},
+  {id:'kuerbis',name:'Kürbiskopf',from:'Halloween-Special',season:'halloween',pal:{g:'#3a8a2a',o:'#ff8a1a',O:'#c85a0a',y:'#ffe14d',c:'#3a1a4a',C:'#5a2a6a',P:'#2a1a3a',W:'#1a1a1a'},
+   head:["......kk........",".....kgk........","...kkkkkkkkkk...","..kooOooooOook..","..kooyooooyook..","..koyyooooyyok..","..kooooooooook..","..kooyyyyyyook..","...kooooooook..."],
+   torso:["...kccccccccC...","..kcCccccccCck..","..kcsccccccsck..","...kccccccccC..."]},
+  {id:'santa',name:'Weihnachtsmann',from:'Weihnachts-Special',season:'xmas',pal:{r:'#d82020',w:'#f8f8f8',s:'#f6c8a0',y:'#ffd23d',P:'#d82020',W:'#1a1a1a'},
+   head:["..........kk....","......kkkkwwk...",".....krrrrrkk...","....krrrrrrk....","...kwwwwwwwwk...","....kssssssk....","....ksessesk....","...kwwwwwwwwk...","....kwwwwwwk...."],
+   torso:["....krrwwrrk....","...krrrwwrrrk...","...kwkkyykkwk...","....krrwwrrk...."]},
+  {id:'hase',name:'Osterhase',from:'Oster-Special',season:'easter',blink:'w',pal:{w:'#f8f8f8',p:'#ffa8c8',e:'#1a1a1a',g:'#3aa83a',y:'#ffd23d',P:'#f8f8f8',W:'#e0d8d0'},
+   head:["....kk....kk....","...kwk....kwk...","...kpk....kpk...","...kwkkkkkkwk...","...kwwwwwwwwk...","...kwwwwwwwwk...","...kwwewwewwk...","....kwwppwwk....",".....kwwwwk....."],
+   torso:["....kggggggk....","...kwggggggwk...","...kwggyyggwk...","....kggggggk...."]},
   {id:'fresser',name:'Pillenfresser',from:'Arcade, 1980',ach:'g1000',gen:'pac'},
   {id:'spuk',name:'Spuk',from:'Arcade, 1980',ach:'k100',gen:'ghost'},
 ];
@@ -320,6 +385,32 @@ const ACH=[
   {id:'lvl25', name:'Veteran',            d:'Erreiche Stufe 25',                     xp:0,  gems:80, test:s=>s.lvl>=25},
   {id:'av3',   name:'Verkleidungskünstler',d:'Besitze 3 Avatare',                    xp:40, gems:0,  test:s=>s.owned.length>=3},
 ];
+/* Seasons: Halloween (15 Oct to 2 Nov), Christmas (1 Dec to 6 Jan), Easter (10 days before to a week after Easter Sunday).
+   Each one recolours the app and the caves, swaps diamonds and enemies, brings its own menu music and a free avatar. */
+const SEASONS={
+  halloween:{name:'Halloween',design:'Halloween-Design',time:'Halloween-Zeit',sub:'SÜSSES · SAURES · DIAMANTEN',av:'kuerbis',until:'2. November',item:'Bonbons',
+    theme:{name:'Spukstollen',bg:'#07040a',dirt:['#3a2448','#4e3060','#24142e'],brick:['#4a4a52','#6a6a74','#1e1e24'],gem:['#ff8a1a','#ffd8a8','#c85a0a','#4a1a04']},
+    fire:['#7bff5a','#c8ff9a','#3ac82a','#f0fff0']},
+  xmas:{name:'Weihnachten',design:'Weihnachtsdesign',time:'Weihnachtszeit',sub:'SCHNEE · STEINE · GESCHENKE',av:'santa',until:'6. Januar',item:'Christbaumkugeln',
+    theme:{name:'Schneegrube',bg:'#040812',dirt:['#c8d8ec','#e8f0fa','#94aac4'],brick:['#a82a2a','#d04a4a','#4a0e0e'],gem:['#ff3a3a','#ffd0d0','#b01818','#4a0606']},
+    fire:['#ff3a3a','#ffd23d','#3ae05a','#ffffff']},
+  easter:{name:'Ostern',design:'Osterdesign',time:'Osterzeit',sub:'EIER · STOLLEN · FRÜHLING',av:'hase',until:'eine Woche nach Ostersonntag',item:'Ostereier',
+    theme:{name:'Osterwiese',bg:'#060c08',dirt:['#4a8a3a','#62a64e','#2e5a24'],brick:['#c89a6a','#e8c094','#5a3e22'],gem:['#ff8ad8','#ffe0f4','#c84aa0','#4a1038']},
+    fire:['#ff8ad8','#ffe066','#8ad8ff','#ffffff']},
+};
+let SEASON=null;
+function easterDate(y){const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),
+  h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),n=h+l-7*m+114;return new Date(y,Math.floor(n/31)-1,n%31+1)}
+function dateSeason(d=new Date()){const m=d.getMonth()+1,day=d.getDate();
+  if(m===10&&day>=15||m===11&&day<=2)return'halloween';
+  if(m===12||m===1&&day<=6)return'xmas';
+  const diff=Math.round((new Date(d.getFullYear(),d.getMonth(),day)-easterDate(d.getFullYear()))/864e5);
+  return diff>=-10&&diff<=7?'easter':null}
+const AV_CAT={kumpel:'game',klempner:'game',link:'game',igel:'game',lara:'game',peach:'game',chief:'game',duke:'game',jazz:'game',
+  zeit:'film',geist:'film',indy:'film',boba:'film',neo:'film',trinity:'film',leeloo:'film',korben:'film',
+  turtle:'comic',tim:'comic',gallier:'comic',obelix:'comic',cowboy:'comic',page:'comic',wicht:'comic',netz:'comic',fleder:'comic',stahl:'comic',klaue:'comic',
+  kuerbis:'season',santa:'season',hase:'season',fresser:'ach',spuk:'ach'};
+const AV_GROUPS=[['game','SPIELE'],['film','FILME'],['comic','COMICS'],['season','SAISON'],['ach','ERFOLGE']];
 const HINTS={
   move:'Leg den Daumen auf die Steuerseite und zieh in eine Richtung, um zu laufen.',
   rock:'Vorsicht! Ein Felsen über dir fällt, sobald unter ihm Platz ist. Weich zur Seite aus.',
@@ -338,7 +429,7 @@ const HINTS={
 /* ================= save ================= */
 const SAVE_KEY='boulderRush.save.v1';
 function defSave(){return{v:1,t:0,xp:0,lvl:1,sp:0,skills:{},pu:Object.fromEntries(PU_IDS.map(id=>[id,{l:1,f:0,c:id==='bomb'?1:0}])),
-  unlocked:1,stars:{},opts:{ctrl:'stick',side:'left',zoom:1,delay:true,sfx:2,mus:2,preview:true,haptic:true,scan:true,tips:true,ghost:true,map:false},
+  unlocked:1,stars:{},opts:{ctrl:'stick',side:'left',zoom:1,delay:true,sfx:2,mus:2,preview:true,haptic:true,scan:true,tips:true,ghost:true,map:false,season:'auto'},
   stats:{gems:0,deaths:0,kills:0,clears:0,chests:0,boss:0,bonus:0,daily:0,legend:0,amoeba:0,mw:0,nopu:0,rewinds:0,pb:0},
   bank:0,gear:{eq:{},bag:[]},ach:{},hints:{},avatar:'kumpel',owned:['kumpel'],daily:{last:'',streak:0,max:0},best:{},opened:{}}}
 function fixSave(s){const d=defSave();if(!s||typeof s!=='object')return d;const o={...d,...s};
@@ -462,6 +553,12 @@ const TRACKS={
   t4:{bpm:108,lead:'triangle',prog:'Am F G Em Am F G Em',drums:'k.......s.......',bass:'R.......',arp:1,
     mel:'a5 - - e5 - - c5 - | f5 - - c5 - - a4 - | g5 - - d5 - - b4 - | e5 - - - - - . . | c6 - b5 - a5 - e5 - | f5 - a5 - c6 - a5 - | b5 - g5 - d5 - g5 - | e5 - - - . . . .'},
 };
+TRACKS.halloween={bpm:100,lead:'triangle',prog:'Dm Dm Bb A Dm Gm A Dm',drums:'k.......s...h...',bass:'R...O...',arp:1,
+  mel:'d5 - a4 - d5 e5 f5 - | e5 - c#5 - a4 - . . | d5 - f5 - a5 - g5 f5 | e5 - - - c#5 - . . | f5 - e5 - d5 - c#5 - | d5 - a#4 - g4 - a4 - | d5 e5 f5 - e5 c#5 a4 - | d5 - - - . . . .'};
+TRACKS.xmas={bpm:116,lead:'square',prog:'G G G G C G A D',drums:'k.h.s.h.k.h.s.hh',bass:'R...F...',arp:1,
+  mel:'b4 - b4 - b4 - - - | b4 - b4 - b4 - - - | b4 - d5 - g4 - - a4 | b4 - - - - - . . | c5 - c5 - c5 - - c5 | c5 - b4 - b4 - b4 b4 | b4 - a4 - a4 - b4 - | a4 - - - d5 - - -'};
+TRACKS.easter={bpm:132,lead:'square',prog:'C F C G C F G C',drums:'k.h.s.h.k.hhs.h.',bass:'R.F.R.F.',arp:1,
+  mel:'c5 - e5 - g5 - e5 - | f5 - a5 - c6 - a5 - | g5 - e5 - c5 - e5 - | d5 - - - g4 - . . | c5 e5 g5 - a5 g5 e5 - | f5 - d5 - b4 - g4 - | c5 - e5 - d5 - b4 - | c5 - - - . . . .'};
 const NOTE={c:0,'c#':1,d:2,'d#':3,e:4,f:5,'f#':6,g:7,'g#':8,a:9,'a#':10,bb:10,b:11};
 const midiF=m=>440*Math.pow(2,(m-69)/12);
 function parseNote(s){const m=/^([a-g](?:#|b)?)(\d)$/.exec(s);return m?12*(+m[2]+1)+NOTE[m[1]]:null}
@@ -539,19 +636,7 @@ function buildStatic(){
       g.fillStyle=mortar?'#1a0a30':(((x+y*3+k*4)%16)<3?'#e8d0ff':((x+k)%4<2?'#8a4aff':'#5a2ad0'));g.fillRect(x,y,1,1)}SPR.mw.push(c)}
   {const c=mk(),g=c.getContext('2d');for(let y=0;y<16;y++)for(let x=0;x<16;x++){const row=y>>2,off=row%2?4:0;
     g.fillStyle=(y%4===3||(x+off)%8===7)?'#111':'#2c2834';g.fillRect(x,y,1,1)}SPR.mwDead=c}
-  // firefly
-  SPR.fire=[];const fc=['#ff7a1a','#ffd23d','#ff3b1a','#fff2a8'];
-  for(let k=0;k<4;k++){const c=mk(),g=c.getContext('2d');
-    [7,5,3,1].forEach((r,j)=>{g.fillStyle=fc[(j+k)%4];const a=8-r-1,s=2*r;g.fillRect(a+1,a+1,s,1);g.fillRect(a+1,a+s,s,1);g.fillRect(a+1,a+1,1,s);g.fillRect(a+s,a+1,1,s)});
-    SPR.fire.push(c)}
-  // butterfly
-  SPR.butter=[];
-  for(let k=0;k<3;k++){const c=mk(),g=c.getContext('2d'),ww=[7,5,3][k];
-    for(let y=0;y<16;y++)for(let x=0;x<16;x++){const dx=Math.abs(x-7.5),dy=y-7.5;let col=null;
-      if(dx<=ww&&((dy<0&&-dy<=dx*1.2+.5)||(dy>=0&&dy<=dx*.8+.5)))col=dx>ww-1.6?'#6be0ff':((x+y)%5===0?'#ffffff':'#ff4fd8');
-      if(dx<1&&Math.abs(dy)<5.5)col='#2a1040';
-      if(col){g.fillStyle=col;g.fillRect(x,y,1,1)}}
-    g.fillStyle='#2a1040';g.fillRect(6,1,1,2);g.fillRect(9,1,1,2);SPR.butter.push(c)}
+  buildEnemies();
   // explosion
   SPR.ex=[];const exc=[['#ffffff','#fff2a8'],['#fff2a8','#ffb43d'],['#ffb43d','#ff5a1a'],['#ff5a1a','#6a1a0a']];
   for(let k=0;k<4;k++){const c=mk(),g=c.getContext('2d'),r=rng(77+k);
@@ -575,9 +660,49 @@ function buildStatic(){
       g.drawImage(fromMap(IC[id],ICP,8),4,4);SPR.pu[id].push(c)}
     SPR.puIcon[id]=SPR.pu[id][0].toDataURL()}
 }
+// Fireflies and butterflies change their look with the season (bats at Halloween, snowflakes at Christmas)
+function buildEnemies(){const ss=SEASON&&SEASONS[SEASON];
+  SPR.fire=[];const fc=ss?ss.fire:['#ff7a1a','#ffd23d','#ff3b1a','#fff2a8'];
+  for(let k=0;k<4;k++){const c=mk(),g=c.getContext('2d');
+    [7,5,3,1].forEach((r,j)=>{g.fillStyle=fc[(j+k)%4];const a=8-r-1,s=2*r;g.fillRect(a+1,a+1,s,1);g.fillRect(a+1,a+s,s,1);g.fillRect(a+1,a+1,1,s);g.fillRect(a+s,a+1,1,s)});
+    SPR.fire.push(c)}
+  SPR.butter=[];
+  for(let k=0;k<3;k++){const c=mk(),g=c.getContext('2d'),px=(x,y,col)=>{g.fillStyle=col;g.fillRect(x,y,1,1)};
+    if(SEASON==='halloween'){const lift=[-3,0,2][k];
+      for(let x=0;x<16;x++){const d=Math.abs(x-7.5);if(d<2)continue;const off=Math.round(lift*(d-2)/5.5),top=7+off,bot=top+2+((x%3===0)?0:1);
+        for(let y=top;y<=bot;y++)px(x,y,y===top?'#4a3a5a':'#1c1424')}
+      for(let y=5;y<12;y++)for(let x=6;x<10;x++)if(Math.hypot(x-7.5,y-8.5)<2.6)px(x,y,'#1c1424');
+      px(6,5,'#1c1424');px(9,5,'#1c1424');px(6,7,'#ff3b3b');px(9,7,'#ff3b3b')}
+    else if(SEASON==='xmas'){const rot=k*Math.PI/18;
+      for(let a=0;a<6;a++){const an=rot+a*Math.PI/3,cx=Math.cos(an),cy=Math.sin(an);
+        for(let r=0;r<=6.5;r+=.5){px(Math.round(7.5+cx*r),Math.round(7.5+cy*r),r>5.5?'#ffffff':'#bfe6ff')}
+        for(const sgn of [-1,1]){const bn=an+sgn*.7;for(let r=0;r<=2;r+=.5)px(Math.round(7.5+cx*4+Math.cos(bn)*r),Math.round(7.5+cy*4+Math.sin(bn)*r),'#e8f6ff')}}
+      px(7,7,'#ffffff');px(8,8,'#ffffff')}
+    else{const ww=[7,5,3][k],wing=SEASON==='easter'?['#ffe066','#ff9ad8']:['#6be0ff','#ff4fd8'];
+      for(let y=0;y<16;y++)for(let x=0;x<16;x++){const dx=Math.abs(x-7.5),dy=y-7.5;let col=null;
+        if(dx<=ww&&((dy<0&&-dy<=dx*1.2+.5)||(dy>=0&&dy<=dx*.8+.5)))col=dx>ww-1.6?wing[0]:((x+y)%5===0?'#ffffff':wing[1]);
+        if(dx<1&&Math.abs(dy)<5.5)col='#2a1040';if(col)px(x,y,col)}
+      px(6,1,'#2a1040');px(6,2,'#2a1040');px(9,1,'#2a1040');px(9,2,'#2a1040')}
+    SPR.butter.push(c)}}
+// Seasonal collectibles replace the diamonds: candy, baubles, painted eggs
+function seasonGems(id,gc){const out=[],sp=[[5,4],[10,5],[9,10],[4,8]];
+  for(let k=0;k<8;k++){const c=mk(),g=c.getContext('2d');
+    for(let y=0;y<16;y++)for(let x=0;x<16;x++){const dx=x-7.5,dy=y-7.5;let col=null;
+      if(id==='halloween'){const ax=Math.abs(dx);
+        if((dx*dx)/21+(dy*dy)/13<=1)col=(dx*dx)/21+(dy*dy)/13>.72?gc[3]:((x+y)%5<2?'#7a2ab0':dy<-1.5?gc[1]:gc[0]);
+        else if(ax>4.2&&ax<7.6&&Math.abs(dy)<=(ax-4.2)*1.2+.6)col=ax>6.6?gc[3]:gc[2]}
+      else if(id==='xmas'){const d=Math.hypot(dx,dy-1);
+        if(d<=6)col=d>5.2?gc[3]:(dy<-1.5&&dx<-.5?gc[1]:Math.abs(dy-1)<.9?'#ffd23d':gc[0]);
+        if(y<=2&&Math.abs(dx)<1.6)col=y===0?'#a07a10':'#ffd23d'}
+      else{const ey=dy+.5,r=ey<0?6.6:5.6,e=(dx*dx)/25+(ey*ey)/(r*r);
+        if(e<=1){col=e>.78?gc[3]:(ey<-2.5&&dx<-.5?gc[1]:gc[0]);
+          if(Math.abs(ey-(((x>>1)&1)?.5:-.5))<.6)col='#7ad0ff';if(Math.abs(ey+3)<.6&&x%2)col='#ffe066';if(Math.abs(ey-3)<.6&&x%2===0)col='#9aff8a'}}
+      if(col){g.fillStyle=col;g.fillRect(x,y,1,1)}}
+    if(k<4){const[x,y]=sp[k];g.fillStyle='#ffffff';g.fillRect(x,y,1,1);g.fillRect(x-1,y,3,1);g.fillRect(x,y-1,1,3)}
+    out.push(c)}return out}
 let TH=null;
 function buildTheme(ti){
-  const th=THEMES[ti%THEMES.length];TH={...th,spr:{}};const s=TH.spr;
+  const ss=SEASON&&SEASONS[SEASON],th={...THEMES[ti%THEMES.length],...(ss?ss.theme:{})};TH={...th,ti,spr:{}};const s=TH.spr;
   s.dirt=[];for(let v=0;v<3;v++){const c=mk(),g=c.getContext('2d'),r=rng(11+v*31);g.fillStyle=th.dirt[0];g.fillRect(0,0,16,16);
     for(let y=0;y<16;y++)for(let x=0;x<16;x++){const q=r();if(q<.2){g.fillStyle=th.dirt[1];g.fillRect(x,y,1,1)}else if(q<.3){g.fillStyle=th.dirt[2];g.fillRect(x,y,1,1)}}
     for(let k=0;k<2;k++){const x=(r()*13)|0,y=(r()*13)|0;g.fillStyle=th.dirt[2];g.fillRect(x,y+1,3,2);g.fillStyle=th.dirt[1];g.fillRect(x,y,2,1)}
@@ -594,6 +719,7 @@ function buildTheme(ti){
       g.fillStyle=col;g.fillRect(x,y,1,1)}
     g.fillStyle=rc[3];g.fillRect(9,9,1,1);g.fillRect(10,10,1,1);g.fillRect(10,11,1,1);s.rock=c}
   s.gem=[];const sp=[[5,4],[10,5],[9,10],[4,8]];
+  if(ss)s.gem=seasonGems(SEASON,th.gem);else
   for(let k=0;k<8;k++){const c=mk(),g=c.getContext('2d'),gc=th.gem;
     for(let y=0;y<16;y++)for(let x=0;x<16;x++){const dx=x-7.5,dy=y-7.5,m=Math.abs(dx)+Math.abs(dy)*.95;if(m>7.3)continue;let col;
       if(m>6.3)col=gc[3];else if(dy<-1.5)col=dx<0?gc[1]:gc[0];else if(dy<1.5)col=dx<0?gc[0]:gc[2];else col=dx<0?gc[2]:gc[3];
@@ -955,8 +1081,8 @@ function introMarkers(x0,x1,y0,y1,ts,now){const L=lv,w=L.w,pulse=.75+.25*Math.si
   for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){const i=y*w+x,tt=L.t[i];
     if(tt===X)ring(x,y,'#7bea6a','AUSGANG');else if(tt===CH)ring(x,y,'#ffcc33','TRUHE');else if(tt===AM&&L.amList.length<2)ring(x,y,'#3ec22f','SCHLEIM');else if(tt===P)ring(x,y,PU[PU_IDS[L.pu[i]]].col);else if(tt===F||tt===B)ring(x,y,'#ff5d73');else if(tt===PL)ring(x,y,'#ffcc33','DU')}}
 function skipIntro(){if(state==='intro')endIntro()}
-function draw(now,dt){const W2=cv.width,H2=cv.height;ctx.fillStyle='#000';ctx.fillRect(0,0,W2,H2);
-  if(!lv||!TH)return;const L=lv,w=L.w,a=(state==='play'||state==='dead')?clamp(acc/TICK,0,1):1;
+function draw(now,dt){const W2=cv.width,H2=cv.height;ctx.fillStyle=state==='menu'&&SEASON?SEASONS[SEASON].theme.bg:'#000';ctx.fillRect(0,0,W2,H2);
+  if(state==='menu'||!lv||!TH){drawDeco(now,dt,SEASON==='xmas'?90:SEASON==='halloween'?8:28);return}const L=lv,w=L.w,a=(state==='play'||state==='dead')?clamp(acc/TICK,0,1):1;
   // camera
   const pi=L.pI;let ppx=pi%w,ppy=(pi/w)|0;
   if(L.mtick[pi]===L.tick&&L.mfrom[pi]>=0){const f=L.mfrom[pi];ppx=f%w+(ppx-f%w)*a;ppy=((f/w)|0)+(ppy-((f/w)|0))*a}
@@ -991,6 +1117,7 @@ function draw(now,dt){const W2=cv.width,H2=cv.height;ctx.fillStyle='#000';ctx.fi
   for(let k=floats.length-1;k>=0;k--){const f=floats[k];f.life-=sec;if(f.life<=0){floats.splice(k,1);continue}f.y-=sec*1.2;
     ctx.fillStyle='#000';ctx.fillText(f.txt,f.x*ts+pp,f.y*ts+pp);ctx.fillStyle=f.col;ctx.fillText(f.txt,f.x*ts,f.y*ts)}
   ctx.restore();
+  if(SEASON==='xmas')drawDeco(now,dt,26,.5);
   if(L.freezeT>0){ctx.fillStyle='rgba(120,140,255,.14)';ctx.fillRect(0,0,W2,H2)}
   if(flash>0){ctx.fillStyle=`rgba(255,255,255,${flash*.35})`;ctx.fillRect(0,0,W2,H2);flash=Math.max(0,flash-sec*3)}
   if(state==='dead'){ctx.fillStyle=`rgba(80,0,10,${.25*clamp(1-deadT/deadMax,0,1)})`;ctx.fillRect(0,0,W2,H2)}
@@ -1010,6 +1137,31 @@ function drawMinimap(now,ts){const L=lv,w=L.w,h=L.h;
   ctx.fillStyle='#000a';ctx.fillRect(x-2*dpr,y-2*dpr,mw+4*dpr,mh+4*dpr);ctx.drawImage(mmC,x,y,mw,mh);
   ctx.save();ctx.beginPath();ctx.rect(x,y,mw,mh);ctx.clip();ctx.strokeStyle='#ffffff90';ctx.lineWidth=Math.max(1,dpr);
   ctx.strokeRect(x+camX/ts*sc,y+(camY+48*dpr)/ts*sc,cv.width/ts*sc,(cv.height-48*dpr)/ts*sc);ctx.restore()}
+
+// Seasonal decoration: bats over the menu at Halloween, snowfall at Christmas, eggs and blossoms at Easter
+let deco=[];
+function newDeco(id,W2,H2,anywhere){const q={x:Math.random()*W2,y:anywhere?Math.random()*H2:-20*dpr,ph:Math.random()*6.28,sz:Math.random()<.3?2:1,vx:0,vy:(.5+Math.random())*dpr,egg:Math.random()<.35};
+  if(id==='halloween'){const dir=anywhere?(Math.random()<.5?-1:1):(Math.random()<.5?-1:1);q.y=Math.random()*H2*.75;q.x=anywhere?q.x:dir>0?-50*dpr:W2+50*dpr;
+    q.vx=dir*(1+Math.random()*1.4)*dpr;q.vy=0;q.sz=2+Math.floor(Math.random()*2)}
+  return q}
+function drawDeco(now,dt,count,alpha=1){if(!SEASON)return;const W2=cv.width,H2=cv.height,id=SEASON,u=Math.max(2,Math.round(2*dpr)),f=Math.min(dt,50)/16;
+  if(deco.length>count)deco.length=count;while(deco.length<count)deco.push(newDeco(id,W2,H2,true));
+  ctx.globalAlpha=alpha;
+  for(let i=0;i<deco.length;i++){const q=deco[i];
+    if(id==='halloween'){q.x+=q.vx*f;q.y+=Math.sin(now/260+q.ph)*.8*dpr*f}else{q.x+=Math.sin(now/700+q.ph)*.5*dpr*f;q.y+=q.vy*f}
+    if(q.y>H2+30*dpr||q.x<-70*dpr||q.x>W2+70*dpr){deco[i]=newDeco(id,W2,H2,false);continue}
+    if(id==='halloween'){const S=8*u*q.sz,im=SPR.butter[[0,1,2,1][Math.floor(now/110+q.ph*3)%4]];
+      if(q.vx<0){ctx.save();ctx.translate(Math.round(q.x+S),Math.round(q.y));ctx.scale(-1,1);ctx.drawImage(im,0,0,S,S);ctx.restore()}else ctx.drawImage(im,Math.round(q.x),Math.round(q.y),S,S)}
+    else if(id==='xmas'){ctx.fillStyle='#ffffff';const s=u*q.sz;ctx.fillRect(Math.round(q.x),Math.round(q.y),s,s)}
+    else if(q.egg&&TH){const S=8*u;ctx.drawImage(TH.spr.gem[4+i%4],Math.round(q.x),Math.round(q.y),S,S)}
+    else{ctx.fillStyle=i%3?'#ffb0e0':'#fff4a0';const s=u*q.sz;ctx.fillRect(Math.round(q.x),Math.round(q.y),s,Math.round(s*1.5))}}
+  ctx.globalAlpha=1}
+function curSeason(){const o=save.opts.season;return o==='off'?null:SEASONS[o]?o:dateSeason()}
+function applySeason(){const ds=dateSeason();
+  if(ds){const av=SEASONS[ds].av;if(!save.owned.includes(av)){save.owned.push(av);persist();
+    setTimeout(()=>toast(`${SEASONS[ds].name}: ${AVATARS.find(a=>a.id===av).name} ist freigeschaltet!`,true),700)}}
+  const id=curSeason();if(id===SEASON)return;SEASON=id;document.documentElement.dataset.season=id||'';deco=[];
+  buildEnemies();SPR.gemIcon=null;buildTheme(0)}
 
 /* ================= HUD ================= */
 let hudCache='';
@@ -1074,7 +1226,7 @@ function startStage(n,fresh,mode='world'){
   $('#ctl').classList.toggle('intro',state==='intro');$('#skipBtn').hidden=state!=='intro';$('#banner').classList.toggle('top',state==='intro');
   musicPlay(run.special==='boss'?'t3':run.special==='bonus'?'t2':'t'+run.theme);
   const title=run.mode==='daily'?'TAGESHERAUSFORDERUNG':run.special==='boss'?`BOSSWELT ${n}: LAWINE`:run.special==='bonus'?`BONUSWELT ${n}`:`WELT ${n}`;
-  const sub=run.special==='boss'?`Das Wasser steigt! Klettere nach oben · ${lv.need} Diamanten`:run.special==='bonus'?`Diamantenregen! Zählen doppelt fürs Konto`:`${TH.name} · sammle ${lv.need} Diamanten`;
+  const sub=run.special==='boss'?`Das Wasser steigt! Klettere nach oben · ${lv.need} Diamanten`:run.special==='bonus'?`Diamantenregen! Zählen doppelt fürs Konto`:`${TH.name} · sammle ${lv.need} ${SEASON?SEASONS[SEASON].item:'Diamanten'}`;
   banner(`${title}<small>${sub}</small>`,state==='intro'?3600:1900);
   try{navigator.wakeLock&&navigator.wakeLock.request('screen').catch(()=>{})}catch(e){}}
 function restartStage(){startStage(curRun.n,false,curRun.mode)}
@@ -1122,13 +1274,17 @@ function stageClear(){state='clear';sfx.win();buzz([30,40,30]);$('#hint').hidden
     ${daily?'<button class="b main" data-act="daily">NOCHMAL, BESTZEIT JAGEN</button>':`<button class="b main" data-act="next">WELT ${n+1} ▶</button>`}
     <div class="row"><button class="b" data-act="skills">SKILLS${save.sp?`<span class="badge">${save.sp}</span>`:''}</button><button class="b" data-act="menu">MENÜ</button></div></div>`;ov.hidden=false;ov.scrollTop=0},900)}
 function lvlCard(){const need=needXP(save.lvl);return `<div class="card"><div class="lvl"><span>STUFE ${save.lvl}</span><span class="muted">${save.xp}/${need} XP</span></div><div class="bar"><i style="width:${save.xp/need*100}%"></i></div></div>`}
+function seasonCard(){const S=SEASONS[SEASON],av=AVATARS.find(a=>a.id===S.av),real=dateSeason()===SEASON;
+  return `<div class="card season"><img src="${avatarIcon(S.av)}" alt=""><div><div class="nm">${S.name.toUpperCase()}!</div>
+    <div class="help">${real?`Bis ${S.until} sammelst du ${S.item}. ${av.name} gehört dir als Geschenk.`:`Vorschau aufs ${S.design}. ${av.name} gibt es zur echten ${S.time} gratis.`}</div></div></div>`}
 const gemImg=()=>`<img class="gi" src="${SPR.gemIcon}" alt="">`;
-function showMenu(){state='menu';screen='title';musicPlay('menu');applyVol();setPlayUI(false);ov.className='';const next=Math.min(save.unlocked,999);
+function showMenu(){state='menu';screen='title';applySeason();musicPlay(SEASON||'menu');applyVol();setPlayUI(false);ov.className='';const next=Math.min(save.unlocked,999);
   const today=dateKey(),dDone=save.daily.last===today,dBest=save.best['d'+today],need=needXP(save.lvl);
   const streak=dDone||save.daily.last===yesterdayKey()?save.daily.streak:0,av=AVATARS.find(a=>a.id===save.avatar)||AVATARS[0];
   const nAch=ACH.filter(a=>save.ach[a.id]).length,nextSp=next%10===0;
   ov.innerHTML=`<div class="wrap">
-    <div class="logo">BOULDER<br>RUSH<small>STOLLEN · STEINE · DIAMANTEN</small></div>
+    <div class="logo">BOULDER<br>RUSH<small>${SEASON?SEASONS[SEASON].sub:'STOLLEN · STEINE · DIAMANTEN'}</small></div>
+    ${SEASON?seasonCard():''}
     <div class="card me"><img src="${avatarIcon(save.avatar)}" alt="${av.name}"><div>
       <div class="lvl"><span>STUFE ${save.lvl}</span><span style="color:var(--gem)">${gemImg()} ${save.bank}</span></div>
       <div class="bar"><i style="width:${save.xp/need*100}%"></i></div>
@@ -1160,11 +1316,11 @@ function showGear(){screen='gear';const eq=save.gear.eq,bag=save.gear.bag;
     <button class="b" data-act="back">ZURÜCK</button></div>`}
 function showAvatars(){screen='avatars';
   ov.innerHTML=`<div class="wrap"><h2>AVATARE</h2>
-    <div class="card help">Helden aus Spielen und Filmen der 80er, 90er und frühen 2000er als Pixel-Hommage. Du kaufst sie mit dem Diamanten-Konto: Jeder Diamant, den du in einer geschafften Welt sammelst, landet dort.</div>
+    <div class="card help">Helden aus Spielen, Filmen und Comics als Pixel-Hommage, von Belgien und Frankreich bis Amerika. Du kaufst sie mit dem Diamanten-Konto: Jeder Diamant, den du in einer geschafften Welt sammelst, landet dort.</div>
     <div class="lvl" style="justify-content:center;color:var(--gem)"><span>${gemImg()} ${save.bank} DIAMANTEN</span></div>
-    <div class="avs">${AVATARS.map(a=>{const own=save.owned.includes(a.id),sel=save.avatar===a.id;
-      const st=sel?'GEWÄHLT':own?'WÄHLEN':a.ach?'ERFOLG: '+ACH.find(x=>x.id===a.ach).name.toUpperCase():`${a.cost} ${gemImg()}`;
-      return `<button class="av${sel?' sel':''}${own?'':' lock'}" data-act="avatar" data-id="${a.id}"><img src="${avatarIcon(a.id)}" alt=""><span>${a.name}</span><small>${a.from}</small><span>${st}</span></button>`}).join('')}</div>
+    ${AV_GROUPS.map(([cat,title])=>`<h2>${title}</h2><div class="avs">${AVATARS.filter(a=>(AV_CAT[a.id]||'game')===cat).map(a=>{const own=save.owned.includes(a.id),sel=save.avatar===a.id;
+      const st=sel?'GEWÄHLT':own?'WÄHLEN':a.ach?'ERFOLG: '+ACH.find(x=>x.id===a.ach).name.toUpperCase():a.season?`GRATIS ZU ${SEASONS[a.season].name.toUpperCase()}`:`${a.cost} ${gemImg()}`;
+      return `<button class="av${sel?' sel':''}${own?'':' lock'}" data-act="avatar" data-id="${a.id}"><img src="${avatarIcon(a.id)}" alt=""><span>${a.name}</span><small>${a.from}</small><span>${st}</span></button>`}).join('')}</div>`).join('')}
     <button class="b" data-act="back">ZURÜCK</button></div>`}
 function showAch(){screen='ach';const st=save.stats,done=ACH.filter(a=>save.ach[a.id]).length;
   const row=(k,v)=>`<div class="stat"><span>${k}</span><span>${v}</span></div>`;
@@ -1212,8 +1368,9 @@ function showOpts(){screen='opts';const o=save.opts;
     <div class="opt"><span>Röhrenbild</span>${seg('scan',[[true,'An'],[false,'Aus']])}</div>
     <div class="opt"><span>Tipps</span>${seg('tips',[[true,'An'],[false,'Aus']])}</div>
     <div class="opt"><span>Geist (Bestzeit)</span>${seg('ghost',[[true,'An'],[false,'Aus']])}</div>
-    <div class="opt"><span>Minikarte</span>${seg('map',[[true,'An'],[false,'Aus']])}</div></div>
-    <div class="card help">„Stick frei“: wo dein Daumen landet, ist die Mitte. „Kreuz fest“: das Steuerkreuz steht immer an derselben Stelle. „Kurz tippen = 1 Feld“ wartet nach dem ersten Schritt kurz, bevor du weiterläufst. Der Geist läuft deine bisher schnellste Runde nach. Tipps wieder einschalten zeigt alle Tipps erneut.</div>
+    <div class="opt"><span>Minikarte</span>${seg('map',[[true,'An'],[false,'Aus']])}</div>
+    <div class="opt"><span>Saison-Design</span>${seg('season',[['auto','Auto'],['off','Aus'],['halloween','Halloween'],['xmas','Weihnachten'],['easter','Ostern']])}</div></div>
+    <div class="card help">„Stick frei“: wo dein Daumen landet, ist die Mitte. „Kreuz fest“: das Steuerkreuz steht immer an derselben Stelle. „Kurz tippen = 1 Feld“ wartet nach dem ersten Schritt kurz, bevor du weiterläufst. Der Geist läuft deine bisher schnellste Runde nach. Tipps wieder einschalten zeigt alle Tipps erneut. „Saison-Design: Auto“ schaltet zu Halloween, Weihnachten und Ostern von selbst um.</div>
     <div class="card help">Gespeichert wird ${cloudOK?'auf diesem Gerät und in deinem Claude-Konto, also auch auf anderen Geräten verfügbar':'auf diesem Gerät'}.<br>
     Stufe ${save.lvl} · ${save.stats.clears} Welten geschafft · ${save.stats.gems} Diamanten · ${save.stats.kills} Gegner · ${save.stats.deaths} Unfälle</div>
     <button class="b" data-act="reset" style="border-color:var(--red);color:var(--red)">${resetArm?'WIRKLICH ALLES LÖSCHEN?':'SPIELSTAND ZURÜCKSETZEN'}</button>
@@ -1233,6 +1390,7 @@ ov.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.
     case 'avatar':{const a=AVATARS.find(x=>x.id===b.dataset.id),sc=ov.scrollTop;if(!a)break;
       if(save.owned.includes(a.id)){setAvatar(a.id);persist()}
       else if(a.ach){sfx.err();toast(`Freischalten mit dem Erfolg „${ACH.find(x=>x.id===a.ach).name}“`)}
+      else if(a.season){sfx.err();toast(`${a.name} gibt es zur ${SEASONS[a.season].time} gratis`)}
       else if(save.bank>=a.cost){save.bank-=a.cost;save.owned.push(a.id);setAvatar(a.id);persist();sfx.lvl();toast(`${a.name} gehört jetzt dir!`,true)}
       else{sfx.err();toast(`Dir fehlen noch ${a.cost-save.bank} Diamanten`)}
       showAvatars();ov.scrollTop=sc;break}
@@ -1246,7 +1404,7 @@ ov.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.
     case 'restart':ov.hidden=true;restartStage();break;
     case 'sel':selSkill=b.dataset.id;showSkills();break;
     case 'learn':{const s=SKILLS.find(x=>x.id===selSkill);if(canLearn(s)){save.skills[s.id]=sk(s.id)+1;save.sp--;persist();sfx.lvl();showSkills()}break}
-    case 'opt':{const k=b.dataset.k;let v=b.dataset.v;if(v==='true')v=true;else if(v==='false')v=false;else if(/^\d+$/.test(v))v=+v;save.opts[k]=v;if(k==='tips'&&v)save.hints={};persist();applyOpts();applyVol();if(k==='mus'||k==='sfx')ensureAc();showOpts();break}
+    case 'opt':{const k=b.dataset.k;let v=b.dataset.v;if(v==='true')v=true;else if(v==='false')v=false;else if(/^\d+$/.test(v))v=+v;save.opts[k]=v;if(k==='tips'&&v)save.hints={};if(k==='season'){applySeason();musicPlay(SEASON||'menu')}persist();applyOpts();applyVol();if(k==='mus'||k==='sfx')ensureAc();showOpts();break}
     case 'reset':if(!resetArm){resetArm=true;showOpts()}else{resetArm=false;const o=save.opts;save=defSave();save.opts=o;persist();toast('Spielstand zurückgesetzt');showMenu()}break;
   }});
 
