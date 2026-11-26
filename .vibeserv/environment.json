@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "base_image": "debian:13",
+  "packages": ["python3"],
+  "runtimes": {"node": "20"},
+  "hooks": {
+    "start": ["cmp -s package-lock.json node_modules/.vibeserv-lock || { npm ci && cp package-lock.json node_modules/.vibeserv-lock; }", "npm run build"],
+    "attach": ["cmp -s package-lock.json node_modules/.vibeserv-lock || { npm ci && cp package-lock.json node_modules/.vibeserv-lock; }"]
+  },
+  "start": {
+    "command": "python3 -m http.server 8080 --bind 0.0.0.0 --directory /workspace/www",
+    "port": 8080,
+    "ready": {"type": "http", "port": 8080, "path": "/"}
+  },
+  "expose": [{"name": "Web-Vorschau", "port": 8080, "proxy": {"listen": 443, "ssl": true}}],
+  "provides": {
+    "hosting": [],
+    "releases": [{"id": "android-app", "name": "Boulder Rush (Android)", "platform": "android", "path": "android/", "signing": true, "description": "Capacitor-Android-App, APK per GitHub-Workflow gebaut und mit dem im Repo liegenden Sideload-Keystore signiert"}],
+    "builds": [{"id": "web", "name": "Web-Spiel (www/)", "path": "src/"}]
+  }
+}
